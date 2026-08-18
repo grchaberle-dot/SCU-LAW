@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LAW101 - Interactive Diagrams</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Patrick Hand',cursive;background:oklch(95% 0.015 200);color:oklch(25% 0.01 280);line-height:1.6;padding:2rem 1rem}
+.container{max-width:960px;margin:0 auto}
+h1{font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3.2rem);color:oklch(45% 0.18 200);text-shadow:3px 3px 0 oklch(85% 0.08 50);margin-bottom:0.3rem}
+.subtitle{font-family:'Caveat',cursive;font-size:1.3rem;color:oklch(50% 0.12 310);margin-bottom:2rem}
+.nav-back{display:inline-block;background:oklch(55% 0.18 180);color:white;padding:0.4rem 1rem;border-radius:20px;text-decoration:none;font-family:'Bangers';font-size:1.1rem;margin-bottom:1.5rem}
+.diagram-card{background:oklch(99% 0.005 200);border:2px solid oklch(85% 0.04 200);border-radius:16px;padding:1.5rem;margin-bottom:2rem;overflow:hidden}
+.diagram-card h2{font-family:'Bangers',cursive;font-size:1.5rem;color:oklch(40% 0.15 280);margin-bottom:1rem}
+.flowchart{display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:1rem 0}
+.flow-node{background:oklch(88% 0.08 280);padding:0.6rem 1.2rem;border-radius:10px;text-align:center;font-weight:600;min-width:200px;cursor:pointer;transition:transform 0.2s,background 0.2s}
+.flow-node:hover{transform:scale(1.05);background:oklch(82% 0.12 280)}
+.flow-node.highlight{background:oklch(75% 0.18 160);color:white}
+.flow-arrow{font-size:1.5rem;color:oklch(60% 0.1 280)}
+.flow-row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;align-items:center}
+.flow-vs{font-family:'Bangers';font-size:1.3rem;color:oklch(55% 0.2 30);padding:0 0.5rem}
+.detail-box{background:oklch(94% 0.04 160);padding:1rem;border-radius:8px;margin-top:1rem;display:none;animation:fadeIn 0.3s}
+.detail-box.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.grid-compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.grid-compare>div{padding:1rem;border-radius:10px}
+.col-left{background:oklch(90% 0.06 280)}
+.col-right{background:oklch(90% 0.06 50)}
+.col-left h3,.col-right h3{font-family:'Bangers';font-size:1.1rem;margin-bottom:0.5rem}
+.col-left h3{color:oklch(40% 0.15 280)}
+.col-right h3{color:oklch(40% 0.15 50)}
+.tree{padding-left:1.5rem;border-left:3px solid oklch(75% 0.1 200)}
+.tree-item{padding:0.4rem 0;cursor:pointer}
+.tree-item:hover{color:oklch(40% 0.2 310)}
+.tree-children{padding-left:1.2rem;display:none}
+.tree-item.open+.tree-children{display:block}
+.tag{display:inline-block;background:oklch(80% 0.1 320);color:oklch(30% 0.05 320);font-size:0.8rem;padding:0.1rem 0.5rem;border-radius:4px;margin:0.1rem}
+@media(max-width:600px){.grid-compare{grid-template-columns:1fr}.flow-row{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="../index.html" class="nav-back">Back to Portal</a>
+<h1>LAW101 Diagrams</h1>
+<p class="subtitle">Tap nodes to explore. Interactive concept maps.</p>
+
+<div class="diagram-card">
+<h2>Liberalism: Core Characteristics</h2>
+<div class="flowchart">
+<div class="flow-node" onclick="toggleDetail('lib-detail')">LIBERALISM</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-row">
+<div class="flow-node" onclick="toggleDetail('lib-liberty')">Liberty</div>
+<div class="flow-node" onclick="toggleDetail('lib-individual')">Individualism</div>
+<div class="flow-node" onclick="toggleDetail('lib-equality')">Equality</div>
+</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-row">
+<div class="flow-node" onclick="toggleDetail('lib-rights')">Rights</div>
+<div class="flow-node" onclick="toggleDetail('lib-rol')">Rule of Law</div>
+<div class="flow-node" onclick="toggleDetail('lib-toleration')">Toleration</div>
+</div>
+</div>
+<div class="detail-box" id="lib-detail">Liberalism emerged from the Enlightenment. It replaced divine authority with reason, individual autonomy, and limited government. It is the dominant ideology of Australian law.</div>
+<div class="detail-box" id="lib-liberty"><strong>Negative Liberty:</strong> Freedom FROM interference (Locke, Mill)<br><strong>Positive Liberty:</strong> Freedom TO do things, state enables opportunity (T.H. Green, communitarianism)</div>
+<div class="detail-box" id="lib-individual">The individual is the fundamental moral, social, legal unit. Society = collection of autonomous rational beings. Thatcher: 'there's no such thing as society'.</div>
+<div class="detail-box" id="lib-equality"><strong>Formal:</strong> Like cases treated alike (procedure)<br><strong>Substantive:</strong> Equality of outcome (addresses structural disadvantage)</div>
+<div class="detail-box" id="lib-rights"><strong>Deontological (Kant):</strong> Rights exist by virtue of being human. Cannot be used as means to an end.<br><strong>Teleological (Bentham/Mill):</strong> Rights justified by consequences. Greatest good for greatest number.</div>
+<div class="detail-box" id="lib-rol">Government bound by law. Separation of powers (Legislative/Executive/Judicial). Laws: predictable, non-retroactive, clear, stable.</div>
+<div class="detail-box" id="lib-toleration">JS Mill: Even if all mankind minus one held one opinion, silencing that one person is not justified. Freedom of speech, thought, action.</div>
+</div>
+
+<div class="diagram-card">
+<h2>Thin vs Thick Rule of Law</h2>
+<div class="grid-compare">
+<div class="col-left">
+<h3>Thin / Formal (Raz)</h3>
+<ul>
+<li>No moral judgment on content</li>
+<li>Supremacy of law</li>
+<li>Equality before law</li>
+<li>Laws: general, promulgated, clear, prospective, stable</li>
+<li>Politically neutral</li>
+<li>More focused</li>
+<li>Morally neutral value of law</li>
+</ul>
+</div>
+<div class="col-right">
+<h3>Thick / Substantive (Bingham)</h3>
+<ul>
+<li>Must protect fundamental human rights</li>
+<li>Access to justice</li>
+<li>Fair procedures</li>
+<li>State comply with international law</li>
+<li>Practical: procedures alone don't protect against tyranny</li>
+<li>Symbolic: oppressive regimes shouldn't get 'rule of law' label</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="diagram-card">
+<h2>Social Contract Theorists</h2>
+<div class="flowchart">
+<div class="flow-row">
+<div class="flow-node" onclick="toggleDetail('hobbes')">Hobbes<br><span class="tag">Leviathan 1651</span></div>
+<div class="flow-node" onclick="toggleDetail('locke')">Locke<br><span class="tag">Two Treatises 1690</span></div>
+<div class="flow-node" onclick="toggleDetail('rousseau')">Rousseau<br><span class="tag">Social Contract 1762</span></div>
+</div>
+</div>
+<div class="detail-box" id="hobbes"><strong>State of Nature:</strong> Brutal, 'war of all against all'<br><strong>Solution:</strong> Surrender ALL freedoms to absolute sovereign<br><strong>Government:</strong> Absolute monarchy preferred</div>
+<div class="detail-box" id="locke"><strong>State of Nature:</strong> Not brutal, governed by natural law (God-given)<br><strong>Solution:</strong> Contract to protect life, liberty, property<br><strong>Government:</strong> Limited, separation of powers, citizens can revolt</div>
+<div class="detail-box" id="rousseau"><strong>State of Nature:</strong> Pure, peaceful, noble savage<br><strong>Solution:</strong> Normative contract to fix corrupt primitive contract<br><strong>Government:</strong> General will, inherent rights</div>
+</div>
+
+<div class="diagram-card">
+<h2>Legal Formalism vs Legal Realism</h2>
+<div class="grid-compare">
+<div class="col-left">
+<h3>Formalism</h3>
+<ul>
+<li>Law = self-contained system</li>
+<li>Judges apply rules mechanically</li>
+<li>No external considerations</li>
+<li>Promotes predictability</li>
+<li>Democratic legitimacy (deference to legislature)</li>
+<li>Sir Owen Dixon: 'strict legalism'</li>
+</ul>
+</div>
+<div class="col-right">
+<h3>Critiques / Realism</h3>
+<ul>
+<li>Multiple laws may apply to same facts</li>
+<li>Laws inevitably over/underinclusive</li>
+<li>Judges have ideology (unconscious)</li>
+<li>Can lead to absurd/unjust results</li>
+<li>Morals and society evolve</li>
+<li>Hides judicial choice behind 'constraint'</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="diagram-card">
+<h2>Feminist Theories of Law</h2>
+<div class="flowchart">
+<div class="flow-row">
+<div class="flow-node" onclick="toggleDetail('fem-lib')">Liberal</div>
+<div class="flow-node" onclick="toggleDetail('fem-rad')">Radical</div>
+<div class="flow-node" onclick="toggleDetail('fem-cult')">Cultural</div>
+</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-row">
+<div class="flow-node" onclick="toggleDetail('fem-soc')">Socialist</div>
+<div class="flow-node" onclick="toggleDetail('fem-post')">Postmodern</div>
+</div>
+</div>
+<div class="detail-box" id="fem-lib"><strong>Liberal Feminism:</strong> Gender equality possible within existing system. Remove legal barriers. Formal equality. Wollstonecraft.</div>
+<div class="detail-box" id="fem-rad"><strong>Radical (MacKinnon):</strong> Law created by males in their image. Not about gender difference but DOMINANCE. Women = embodiments of men's sexual needs.</div>
+<div class="detail-box" id="fem-cult"><strong>Cultural/Difference (Gilligan):</strong> Women have different ethical framework (care vs justice). Different but not inferior. Criticised as reinforcing stereotypes.</div>
+<div class="detail-box" id="fem-soc"><strong>Socialist:</strong> Gendered division of labour supports capitalism. Gender inequality rooted in economic structure. Engels: capitalism defeated 'mother right'.</div>
+<div class="detail-box" id="fem-post"><strong>Postmodern:</strong> Rejects grand narratives. Particular instances of oppression. Acknowledges intersectionality. Challenges legal rhetoric.</div>
+</div>
+
+<div class="diagram-card">
+<h2>Law & Morality: The Spectrum</h2>
+<div class="flowchart">
+<div class="flow-row">
+<div class="flow-node" onclick="toggleDetail('nat-law')">Natural Law<br><span class="tag">Aquinas/Finnis</span></div>
+<div class="flow-vs">vs</div>
+<div class="flow-node" onclick="toggleDetail('pos-law')">Legal Positivism<br><span class="tag">Austin/Hart/Raz</span></div>
+</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-node" onclick="toggleDetail('compromise')">Hart's Compromise: Minimum Content of Natural Law</div>
+</div>
+<div class="detail-box" id="nat-law">Law must align with superior moral principles. Immoral law is not law at all. Finnis: 7 basic goods provide foundation for moral evaluation of law.</div>
+<div class="detail-box" id="pos-law">Law is law once properly enacted. No necessary connection to morality. Austin: existence of law is one thing, its merit another. Focus on social facts.</div>
+<div class="detail-box" id="compromise">Hart: Law and morality are separate BUT law must have 'minimum content' for survival (don't kill, don't steal). Without this, no reason to obey. Moral evaluation still separate from legal validity.</div>
+</div>
+
+<div class="diagram-card">
+<h2>Human Rights: Generations</h2>
+<div class="flowchart">
+<div class="flow-row">
+<div class="flow-node" onclick="toggleDetail('gen1')">1st Generation<br><span class="tag">Civil & Political</span></div>
+<div class="flow-node" onclick="toggleDetail('gen2')">2nd Generation<br><span class="tag">Economic/Social/Cultural</span></div>
+<div class="flow-node" onclick="toggleDetail('gen3')">3rd Generation<br><span class="tag">Collective/Solidarity</span></div>
+</div>
+</div>
+<div class="detail-box" id="gen1"><strong>1st Gen:</strong> Right to life, liberty, fair trial, vote, free speech, religion. Negative rights (state must NOT interfere). ICCPR. Liberal foundations.</div>
+<div class="detail-box" id="gen2"><strong>2nd Gen:</strong> Right to education, health, housing, work, social security. Positive rights (state MUST provide). ICESCR. Socialist influence.</div>
+<div class="detail-box" id="gen3"><strong>3rd Gen:</strong> Right to self-determination, development, clean environment, peace. Collective rights of peoples. UNDRIP. Emerging.</div>
+</div>
+
+</div>
+<script>
+function toggleDetail(id){
+const el=document.getElementById(id);
+if(!el)return;
+const wasActive=el.classList.contains('active');
+document.querySelectorAll('.detail-box').forEach(d=>d.classList.remove('active'));
+if(!wasActive)el.classList.add('active');
+}
+</script>
+</body>
+</html>
