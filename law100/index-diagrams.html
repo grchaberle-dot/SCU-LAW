@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LAW100 Foundations of Law - Diagrams</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Patrick Hand',cursive;background:oklch(95% 0.015 160);color:oklch(25% 0.01 280);line-height:1.6;padding:2rem 1rem}
+.container{max-width:960px;margin:0 auto}
+h1{font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3.2rem);color:oklch(45% 0.18 160);text-shadow:3px 3px 0 oklch(85% 0.08 50);margin-bottom:0.3rem}
+.subtitle{font-family:'Caveat',cursive;font-size:1.3rem;color:oklch(50% 0.12 280);margin-bottom:2rem}
+.nav-back{display:inline-block;background:oklch(55% 0.18 160);color:white;padding:0.4rem 1rem;border-radius:20px;text-decoration:none;font-family:'Bangers';font-size:1.1rem;margin-bottom:1.5rem}
+.diagram-card{background:oklch(99% 0.005 160);border:2px solid oklch(85% 0.04 160);border-radius:16px;padding:1.5rem;margin-bottom:2rem}
+.diagram-card h2{font-family:'Bangers',cursive;font-size:1.5rem;color:oklch(40% 0.15 160);margin-bottom:1rem}
+.flowchart{display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:1rem 0}
+.flow-node{background:oklch(88% 0.08 160);padding:0.6rem 1.2rem;border-radius:10px;text-align:center;font-weight:600;min-width:180px;cursor:pointer;transition:transform 0.2s,background 0.2s}
+.flow-node:hover{transform:scale(1.05);background:oklch(82% 0.12 160)}
+.flow-arrow{font-size:1.5rem;color:oklch(60% 0.1 160)}
+.flow-row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;align-items:center}
+.flow-vs{font-family:'Bangers';font-size:1.3rem;color:oklch(55% 0.2 30);padding:0 0.5rem}
+.detail-box{background:oklch(94% 0.04 200);padding:1rem;border-radius:8px;margin-top:1rem;display:none;animation:fadeIn 0.3s}
+.detail-box.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.grid-compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.grid-compare>div{padding:1rem;border-radius:10px}
+.col-a{background:oklch(90% 0.06 160)}
+.col-b{background:oklch(90% 0.06 320)}
+.col-a h3{font-family:'Bangers';color:oklch(40% 0.15 160);margin-bottom:0.5rem}
+.col-b h3{font-family:'Bangers';color:oklch(40% 0.15 320);margin-bottom:0.5rem}
+.tag{display:inline-block;background:oklch(80% 0.1 200);color:oklch(30% 0.05 200);font-size:0.8rem;padding:0.1rem 0.5rem;border-radius:4px;margin:0.1rem}
+.hierarchy-chart{display:flex;flex-direction:column;align-items:center;gap:0.3rem}
+.h-level{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center}
+.h-node{background:oklch(85% 0.08 160);padding:0.4rem 0.8rem;border-radius:6px;font-size:0.9rem;text-align:center}
+.h-node.top{background:oklch(65% 0.15 160);color:white;font-weight:700;padding:0.6rem 1.5rem;font-size:1.1rem}
+.h-node.mid{background:oklch(75% 0.12 200);color:white}
+@media(max-width:600px){.grid-compare{grid-template-columns:1fr}.flow-row{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="../index.html" class="nav-back">Back to Portal</a>
+<h1>LAW100 Diagrams</h1>
+<p class="subtitle">Tap to explore. Interactive concept maps for Foundations of Law.</p>
+
+<div class="diagram-card">
+<h2>Australian Court Hierarchy</h2>
+<div class="hierarchy-chart">
+<div class="h-level"><div class="h-node top">High Court of Australia</div></div>
+<div class="flow-arrow">↑</div>
+<div class="h-level">
+<div class="h-node mid">Federal Court</div>
+<div class="h-node mid">Family Court</div>
+<div class="h-node mid">State Supreme Courts</div>
+</div>
+<div class="flow-arrow">↑</div>
+<div class="h-level">
+<div class="h-node">District/County Courts</div>
+<div class="h-node">Federal Circuit Court</div>
+</div>
+<div class="flow-arrow">↑</div>
+<div class="h-level">
+<div class="h-node">Local/Magistrates Courts</div>
+<div class="h-node">Tribunals (AAT, NCAT)</div>
+</div>
+</div>
+<p style="text-align:center;margin-top:1rem;font-size:0.9rem;color:oklch(50% 0.05 200)">Appeals flow upward. High Court = final court of appeal & constitutional guardian.</p>
+</div>
+
+<div class="diagram-card">
+<h2>Sources of Australian Law</h2>
+<div class="flowchart">
+<div class="flow-row">
+<div class="flow-node" onclick="toggleDetail('src-const')">Constitution<br><span class="tag">Supreme law</span></div>
+<div class="flow-node" onclick="toggleDetail('src-stat')">Statute Law<br><span class="tag">Parliament</span></div>
+<div class="flow-node" onclick="toggleDetail('src-common')">Common Law<br><span class="tag">Courts/precedent</span></div>
+</div>
+</div>
+<div class="detail-box" id="src-const">The Australian Constitution (1901) is the supreme law. It creates the federal structure, distributes power, and cannot be changed without a s128 referendum (majority of voters + majority of states).</div>
+<div class="detail-box" id="src-stat">Legislation/statutes made by Parliament (Cth or State). Passed through both Houses + Royal Assent. Delegated legislation made under authority of an Act. Prevails over common law (parliamentary sovereignty).</div>
+<div class="detail-box" id="src-common">Judge-made law through decisions (precedent). Doctrine of stare decisis: lower courts bound by higher courts in same hierarchy. Ratio decidendi = binding principle. Obiter dicta = persuasive only.</div>
+</div>
+
+<div class="diagram-card">
+<h2>Separation of Powers</h2>
+<div class="flowchart">
+<div class="flow-node" style="background:oklch(75% 0.15 160);color:white">AUSTRALIAN CONSTITUTION</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-row">
+<div class="flow-node" onclick="toggleDetail('leg')">Chapter I<br>Legislative<br><span class="tag">Parliament</span></div>
+<div class="flow-node" onclick="toggleDetail('exec')">Chapter II<br>Executive<br><span class="tag">Government</span></div>
+<div class="flow-node" onclick="toggleDetail('jud')">Chapter III<br>Judicial<br><span class="tag">Courts</span></div>
+</div>
+</div>
+<div class="detail-box" id="leg"><strong>Makes law.</strong> Federal Parliament = Senate + House of Reps + Queen (Governor-General). s51 lists Commonwealth powers. Residual powers remain with States.</div>
+<div class="detail-box" id="exec"><strong>Administers/enforces law.</strong> Governor-General (formally), PM & Cabinet (in practice). Departments, agencies, police. Responsible government: executive must maintain confidence of lower house.</div>
+<div class="detail-box" id="jud"><strong>Interprets/applies law.</strong> High Court + federal courts created by Parliament. s71-80. Judicial independence: s72 (tenure to age 70, removal only by both Houses). Judicial review of legislation.</div>
+</div>
+
+<div class="diagram-card">
+<h2>Doctrine of Precedent (Stare Decisis)</h2>
+<div class="grid-compare">
+<div class="col-a">
+<h3>Ratio Decidendi</h3>
+<ul>
+<li>The legal REASON for the decision</li>
+<li>Binding on lower courts in same hierarchy</li>
+<li>The principle that must be followed</li>
+<li>Found by identifying material facts + legal reasoning</li>
+</ul>
+</div>
+<div class="col-b">
+<h3>Obiter Dicta</h3>
+<ul>
+<li>'Said in passing'</li>
+<li>NOT binding, only persuasive</li>
+<li>May be followed if from a respected court/judge</li>
+<li>Hypothetical scenarios discussed by judge</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="diagram-card">
+<h2>How a Bill Becomes Law (Federal)</h2>
+<div class="flowchart">
+<div class="flow-node">Bill introduced (1st Reading)</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-node">2nd Reading (debate on principles)</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-node">Committee Stage (clause by clause)</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-node">3rd Reading (final vote in originating house)</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-node">Sent to other House (same process)</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-node">Royal Assent (Governor-General)</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-node" style="background:oklch(70% 0.15 160);color:white">ACT OF PARLIAMENT</div>
+</div>
+</div>
+
+<div class="diagram-card">
+<h2>Statutory Interpretation: Approaches</h2>
+<div class="grid-compare">
+<div class="col-a">
+<h3>Literal Rule</h3>
+<p>Words given ordinary, plain meaning. Even if result seems unjust. Most formalist approach.</p>
+</div>
+<div class="col-b">
+<h3>Purposive Approach</h3>
+<p>Interpret to give effect to Parliament's PURPOSE. s15AA Acts Interpretation Act 1901 (Cth). Now dominant in Australia.</p>
+</div>
+</div>
+<div style="margin-top:1rem;padding:1rem;background:oklch(92% 0.04 50);border-radius:8px">
+<strong>Golden Rule:</strong> Use literal meaning UNLESS it produces absurdity, then adopt alternative meaning.<br>
+<strong>Mischief Rule:</strong> What 'mischief' (problem) was the Act designed to remedy? Interpret to suppress the mischief.
+</div>
+</div>
+
+<div class="diagram-card">
+<h2>Federalism: Division of Powers</h2>
+<div class="flowchart">
+<div class="flow-row">
+<div class="flow-node" onclick="toggleDetail('exclusive')">Exclusive Cth<br><span class="tag">s52, s90</span></div>
+<div class="flow-node" onclick="toggleDetail('concurrent')">Concurrent<br><span class="tag">s51</span></div>
+<div class="flow-node" onclick="toggleDetail('residual')">Residual State<br><span class="tag">Not listed</span></div>
+</div>
+</div>
+<div class="detail-box" id="exclusive"><strong>Only Commonwealth can legislate:</strong> Customs/excise (s90), currency, defence forces raised by Cth, territories (s122), seat of government.</div>
+<div class="detail-box" id="concurrent"><strong>Both can legislate, but s109:</strong> If inconsistency, Cth prevails. Includes: trade/commerce, taxation, banking, marriage, immigration, corporations, external affairs.</div>
+<div class="detail-box" id="residual"><strong>States retain:</strong> Everything NOT given to Cth. Includes: criminal law, education, health, transport, land/property, police.</div>
+</div>
+
+</div>
+<script>
+function toggleDetail(id){
+const el=document.getElementById(id);
+if(!el)return;
+const wasActive=el.classList.contains('active');
+document.querySelectorAll('.detail-box').forEach(d=>d.classList.remove('active'));
+if(!wasActive)el.classList.add('active');
+}
+</script>
+</body>
+</html>
