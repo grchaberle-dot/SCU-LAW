@@ -3,84 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UNE LAW Study Portal</title>
+<title>UNE LAW Study Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&family=Caveat:wght@500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Patrick Hand',cursive;background:oklch(94% 0.02 320);min-height:100vh;padding:2rem 1rem}
-.header{text-align:center;margin-bottom:2.5rem}
-h1{font-family:'Bangers',cursive;font-size:clamp(2.5rem,6vw,4rem);color:oklch(45% 0.2 310);text-shadow:4px 4px 0 oklch(85% 0.08 50);letter-spacing:0.02em}
-.tagline{font-family:'Caveat',cursive;font-size:1.4rem;color:oklch(50% 0.12 180);margin-top:0.3rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto}
-.unit-card{background:oklch(98% 0.005 280);border-radius:16px;padding:1.8rem;border:2px solid oklch(85% 0.05 280);transition:transform 0.2s}
-.unit-card:hover{transform:translateY(-3px)}
-.unit-card h2{font-family:'Bangers',cursive;font-size:1.6rem;color:oklch(40% 0.15 280);margin-bottom:0.3rem}
-.unit-card .code{font-family:'Caveat',cursive;font-size:1.1rem;color:oklch(55% 0.12 180);margin-bottom:1rem}
-.tile-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
-.tile{display:block;text-align:center;padding:0.7rem;border-radius:10px;text-decoration:none;font-family:'Patrick Hand',cursive;font-size:1rem;font-weight:600;transition:transform 0.15s,background 0.15s}
-.tile:hover{transform:scale(1.04)}
-.tile-summary{background:oklch(88% 0.08 160);color:oklch(30% 0.1 160)}
-.tile-flash{background:oklch(88% 0.08 320);color:oklch(30% 0.1 320)}
-.tile-quiz{background:oklch(88% 0.08 280);color:oklch(30% 0.1 280)}
-.tile-diagrams{background:oklch(88% 0.08 50);color:oklch(30% 0.1 50)}
-.tile-soon{background:oklch(92% 0.02 280);color:oklch(60% 0.05 280);pointer-events:none}
-.resources{max-width:1100px;margin:2.5rem auto 0}
-.resources h2{font-family:'Bangers',cursive;font-size:1.5rem;color:oklch(45% 0.15 50);margin-bottom:1rem}
-.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.8rem}
-.res-link{display:block;background:oklch(96% 0.01 50);border:1.5px solid oklch(85% 0.05 50);border-radius:10px;padding:0.8rem 1rem;text-decoration:none;color:oklch(35% 0.1 280);font-weight:600;transition:background 0.15s}
-.res-link:hover{background:oklch(92% 0.04 50)}
-@media(max-width:500px){.tile-grid{grid-template-columns:1fr}}
+body{font-family:'Patrick Hand',cursive;background:linear-gradient(135deg,oklch(94% 0.04 320) 0%,oklch(94% 0.04 200) 50%,oklch(94% 0.04 80) 100%);min-height:100vh;padding:2rem 1rem;color:oklch(25% 0.02 280)}
+
+/* HEADER */
+.header{text-align:center;margin-bottom:3rem;position:relative}
+.header::after{content:'';position:absolute;bottom:-1rem;left:50%;transform:translateX(-50%);width:120px;height:4px;background:oklch(70% 0.2 320);border-radius:2px}
+h1{font-family:'Bangers',cursive;font-size:clamp(3rem,8vw,5rem);color:oklch(35% 0.15 310);text-shadow:4px 4px 0 oklch(80% 0.1 50),-1px -1px 0 oklch(90% 0.05 200);letter-spacing:0.03em;line-height:1.1}
+.tagline{font-family:'Caveat',cursive;font-size:clamp(1.2rem,3vw,1.6rem);color:oklch(45% 0.12 180);margin-top:0.5rem}
+
+/* UNITS GRID */
+.units{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:1100px;margin:0 auto 3rem}
+.unit-card{background:oklch(99% 0.005 280);border-radius:20px;padding:2rem;border:3px solid oklch(80% 0.08 280);position:relative;overflow:hidden;transition:transform 0.2s}
+.unit-card:hover{transform:translateY(-4px)}
+.unit-card::before{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;opacity:0.15}
+.unit-card:nth-child(1)::before{background:oklch(60% 0.25 160)}
+.unit-card:nth-child(2)::before{background:oklch(60% 0.25 280)}
+.unit-card:nth-child(3)::before{background:oklch(60% 0.25 30)}
+.unit-emoji{font-size:2.5rem;margin-bottom:0.5rem}
+.unit-card h2{font-family:'Bangers',cursive;font-size:1.8rem;color:oklch(35% 0.12 280);margin-bottom:0.2rem}
+.unit-card .unit-name{font-family:'Caveat',cursive;font-size:1.15rem;color:oklch(50% 0.1 200);margin-bottom:1.2rem}
+
+/* TILES */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem}
+.tile{display:flex;align-items:center;justify-content:center;gap:0.4rem;padding:0.8rem 0.5rem;border-radius:12px;text-decoration:none;font-family:'Patrick Hand',cursive;font-size:1.05rem;font-weight:700;transition:transform 0.15s,box-shadow 0.15s;text-align:center}
+.tile:hover{transform:scale(1.05);box-shadow:0 4px 12px oklch(50% 0.1 280 / 0.2)}
+.t-summary{background:oklch(82% 0.12 160);color:oklch(25% 0.08 160)}
+.t-flash{background:oklch(82% 0.12 320);color:oklch(25% 0.08 320)}
+.t-quiz{background:oklch(82% 0.12 280);color:oklch(25% 0.08 280)}
+.t-diagrams{background:oklch(82% 0.12 50);color:oklch(25% 0.08 50)}
+.t-soon{background:oklch(92% 0.02 280);color:oklch(60% 0.04 280);pointer-events:none;opacity:0.6}
+
+/* RESOURCES */
+.resources{max-width:1100px;margin:0 auto}
+.resources h2{font-family:'Bangers',cursive;font-size:1.8rem;color:oklch(40% 0.15 50);margin-bottom:1.2rem;text-shadow:2px 2px 0 oklch(88% 0.06 50)}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.8rem}
+.res-link{display:block;background:oklch(97% 0.01 50);border:2px solid oklch(82% 0.08 50);border-radius:12px;padding:1rem 1.2rem;text-decoration:none;color:oklch(30% 0.08 280);font-weight:700;font-size:1.05rem;transition:transform 0.15s,background 0.15s}
+.res-link:hover{transform:scale(1.03);background:oklch(93% 0.05 50)}
+.res-link span{margin-right:0.4rem}
+
+/* FOOTER */
+.footer{text-align:center;margin-top:3rem;font-size:0.9rem;color:oklch(55% 0.05 280)}
+
+@media(max-width:500px){.tiles{grid-template-columns:1fr}.units{gap:1.5rem}}
 </style>
 </head>
 <body>
+
 <div class="header">
-<h1>UNE LAW Study Portal</h1>
-<p class="tagline">BCrim/BLaws - T3 2026</p>
+<h1>⚖️ UNE LAW Study Hub</h1>
+<p class="tagline">BCrim / BLaws • T3 2026 • Georgia's Portal</p>
 </div>
 
-<div class="grid">
+<div class="units">
+
 <div class="unit-card">
+<div class="unit-emoji">📚</div>
 <h2>LAW100</h2>
-<p class="code">Foundations of Law</p>
-<div class="tile-grid">
-<a href="law100/index-summary.html" class="tile tile-summary">Summary</a>
-<a href="law100/index-flashcards.html" class="tile tile-flash">Flashcards</a>
-<a href="law100/index-quiz.html" class="tile tile-quiz">Quiz</a>
-<a href="law100/index-diagrams.html" class="tile tile-diagrams">Diagrams</a>
+<p class="unit-name">Foundations of Law</p>
+<div class="tiles">
+<a href="law100/index-summary.html" class="tile t-summary">📖 Summary</a>
+<a href="law100/index-flashcards.html" class="tile t-flash">🃏 Flashcards</a>
+<a href="law100/index-quiz.html" class="tile t-quiz">❓ Quiz</a>
+<a href="law100/index-diagrams.html" class="tile t-diagrams">🗺️ Diagrams</a>
 </div>
 </div>
 
 <div class="unit-card">
+<div class="unit-emoji">⚖️</div>
 <h2>LAW101</h2>
-<p class="code">Law in Context</p>
-<div class="tile-grid">
-<a href="law101/index-summary.html" class="tile tile-summary">Summary</a>
-<a href="law101/index-diagrams.html" class="tile tile-diagrams">Diagrams</a>
-<a class="tile tile-soon">Flashcards (soon)</a>
-<a class="tile tile-soon">Quiz (soon)</a>
+<p class="unit-name">Law in Context</p>
+<div class="tiles">
+<a href="law101/index-summary.html" class="tile t-summary">📖 Summary</a>
+<a href="law101/index-diagrams.html" class="tile t-diagrams">🗺️ Diagrams</a>
+<a class="tile t-soon">🃏 Flashcards (soon)</a>
+<a class="tile t-soon">❓ Quiz (soon)</a>
 </div>
 </div>
 
 <div class="unit-card">
+<div class="unit-emoji">🔍</div>
 <h2>CRIM107</h2>
-<p class="code">Victimology</p>
-<div class="tile-grid">
-<a class="tile tile-soon">Summary (soon)</a>
-<a class="tile tile-soon">Flashcards (soon)</a>
-<a class="tile tile-soon">Quiz (soon)</a>
-<a class="tile tile-soon">Diagrams (soon)</a>
+<p class="unit-name">Victimology</p>
+<div class="tiles">
+<a class="tile t-soon">📖 Summary (soon)</a>
+<a class="tile t-soon">🃏 Flashcards (soon)</a>
+<a class="tile t-soon">❓ Quiz (soon)</a>
+<a class="tile t-soon">🗺️ Diagrams (soon)</a>
 </div>
 </div>
+
 </div>
 
 <div class="resources">
-<h2>Resources</h2>
+<h2>📦 Resources</h2>
 <div class="res-grid">
-<a href="resources/ai-prompt-case-summary.html" class="res-link">AI Prompt: Case Summary</a>
-<a href="resources/weekly-study-template.html" class="res-link">Weekly Study Template</a>
-<a href="resources/legal-databases.html" class="res-link">Legal Research DBs</a>
-<a href="resources/crim-databases.html" class="res-link">Criminology DBs</a>
+<a href="resources/ai-prompt-case-summary.html" class="res-link"><span>🤖</span> AI Prompt: Case Summary</a>
+<a href="resources/weekly-study-template.html" class="res-link"><span>📅</span> Weekly Study Template</a>
+<a href="resources/legal-databases.html" class="res-link"><span>📚</span> Legal Research DBs</a>
+<a href="resources/crim-databases.html" class="res-link"><span>🔬</span> Criminology DBs</a>
 </div>
 </div>
+
+<p class="footer">Built with ❤️ by Georgia + ClickUp Brain • Auto-updated from Studocu uploads</p>
+
 </body>
 </html>
