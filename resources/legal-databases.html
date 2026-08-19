@@ -20,8 +20,13 @@ h2{font-family:'Bangers',cursive;font-size:1.5rem;color:oklch(98% 0.01 0);backgr
 .db-card p{font-size:0.95rem;margin-bottom:0.5rem}
 .db-card a{color:oklch(40% 0.18 280);font-weight:700}
 .db-card .access{font-size:0.85rem;background:oklch(88% 0.06 160);display:inline-block;padding:0.1rem 0.5rem;border-radius:4px;color:oklch(30% 0.08 160)}
+.db-card .warning{font-size:0.85rem;background:oklch(90% 0.08 50);display:inline-block;padding:0.1rem 0.5rem;border-radius:4px;color:oklch(35% 0.1 50);margin-left:0.3rem}
 .tip{background:oklch(92% 0.06 50);border-radius:10px;padding:1rem 1.2rem;margin:1.5rem 0;font-size:0.95rem}
 .tip strong{color:oklch(40% 0.15 50)}
+.workflow{background:oklch(94% 0.04 290);border:2px dashed oklch(70% 0.08 290);border-radius:12px;padding:1.2rem 1.5rem;margin:1rem 0}
+.workflow h4{font-family:'Bangers',cursive;color:oklch(35% 0.12 290);margin-bottom:0.5rem}
+.workflow ol{padding-left:20px}
+.workflow li{margin-bottom:0.4rem}
 </style>
 </head>
 <body>
@@ -34,7 +39,8 @@ h2{font-family:'Bangers',cursive;font-size:1.5rem;color:oklch(98% 0.01 0);backgr
 
 <div class="db-card">
 <h3>Westlaw AU (Thomson Reuters)</h3>
-<p>Cases, legislation, journals, commentary. The big one for Australian law.</p>
+<p>Cases, legislation, journals, commentary. The big one for Australian law. Structured case presentation with notes/explanations.</p>
+<p><strong>UNE access includes:</strong> FirstPoint (case citator). Does NOT include: case summaries or AI-assisted search.</p>
 <p><a href="https://www.westlaw.com.au" target="_blank">westlaw.com.au</a></p>
 <span class="access">UNE Library login required</span>
 </div>
@@ -48,29 +54,47 @@ h2{font-family:'Bangers',cursive;font-size:1.5rem;color:oklch(98% 0.01 0);backgr
 
 <div class="db-card">
 <h3>AustLII (Free)</h3>
-<p>Australasian Legal Information Institute. Free access to cases, legislation, treaties from all Australian jurisdictions.</p>
+<p>Australasian Legal Information Institute. Free access to cases, legislation, treaties from all Australian jurisdictions. Great click-through to sections.</p>
 <p><a href="https://www.austlii.edu.au" target="_blank">austlii.edu.au</a></p>
-<span class="access">Free - no login needed</span>
+<span class="access">Free - no login needed</span><span class="warning">⚠️ May lag behind updates</span>
 </div>
 
 <div class="db-card">
 <h3>Jade (Free)</h3>
-<p>AI-enhanced legal research. Cases with paragraph-level citations, visual case maps.</p>
+<p>AI-enhanced legal research. Cases with paragraph-level citations, visual case maps. Clean layout for reading full judgments.</p>
 <p><a href="https://jade.io" target="_blank">jade.io</a></p>
-<span class="access">Free account - enhanced features with UNE email</span>
+<span class="access">Free account - enhanced features with UNE email</span><span class="warning">⚠️ Verify currency against official sites</span>
+</div>
+
+<h2>📜 Official Legislation Sources</h2>
+
+<div class="db-card">
+<h3>NSW Legislation (Primary Source for NSW)</h3>
+<p>Official NSW Acts, regulations, EPIs. Includes historical versions via the <strong>version date selector</strong> (timeline bar on any Act page).</p>
+<p><strong>Key features:</strong> Browse tabs (In Force, Repealed, As Made, Bills), alphabet browse, version history.</p>
+<p><strong>Bills tab:</strong> Find Explanatory Notes explaining WHY provisions changed. Essential for statutory interpretation.</p>
+<p><a href="https://legislation.nsw.gov.au" target="_blank">legislation.nsw.gov.au</a> | <a href="https://legislation.nsw.gov.au/browse" target="_blank">/browse</a></p>
+<span class="access">Free - no login needed</span>
 </div>
 
 <div class="db-card">
 <h3>Federal Register of Legislation</h3>
-<p>Official Commonwealth legislation (Acts, regulations, compilations). Authoritative versions.</p>
+<p>Official Commonwealth legislation (Acts, regulations, compilations). Authoritative current versions.</p>
 <p><a href="https://www.legislation.gov.au" target="_blank">legislation.gov.au</a></p>
 <span class="access">Free - no login needed</span>
 </div>
 
 <div class="db-card">
-<h3>NSW Legislation</h3>
-<p>Official NSW Acts, regulations, EPIs. Includes historical versions and point-in-time access.</p>
-<p><a href="https://legislation.nsw.gov.au" target="_blank">legislation.nsw.gov.au</a></p>
+<h3>Other State Legislation Sites</h3>
+<p>Same structure as NSW. Always go to the official site for the relevant jurisdiction.</p>
+<p>VIC: <a href="https://legislation.vic.gov.au" target="_blank">legislation.vic.gov.au</a> | QLD: <a href="https://www.legislation.qld.gov.au" target="_blank">legislation.qld.gov.au</a></p>
+<span class="access">Free - no login needed</span>
+</div>
+
+<div class="db-card">
+<h3>NSW Hansard (Second Reading Speeches)</h3>
+<p>Parliamentary debates including Second Reading Speeches. Use for statutory interpretation when you need to understand Parliament's intent behind a provision.</p>
+<p><a href="https://www.parliament.nsw.gov.au/hansard" target="_blank">parliament.nsw.gov.au/hansard</a></p>
 <span class="access">Free - no login needed</span>
 </div>
 
@@ -143,8 +167,42 @@ h2{font-family:'Bangers',cursive;font-size:1.5rem;color:oklch(98% 0.01 0);backgr
 <span class="access">Free PDF available</span>
 </div>
 
+<h2>🛠️ Research Workflows</h2>
+
+<div class="workflow">
+<h4>🔍 Finding Legislation</h4>
+<ol>
+<li>Identify jurisdiction (NSW, Cth, other state)</li>
+<li>Go to official legislation site for that jurisdiction</li>
+<li>Browse alphabetically or search by name/topic</li>
+<li>Check you have the correct VERSION (use date selector if historical)</li>
+<li>Read: Preliminaries → Definitions → Relevant Part/Division → Schedules</li>
+<li>Check for associated Regulations (99% of Acts have them)</li>
+<li>If interpreting: check Bills tab for Explanatory Notes + Hansard for Second Reading Speeches</li>
+</ol>
+</div>
+
+<div class="workflow">
+<h4>📚 Reading Case Law (When No Summary Available)</h4>
+<ol>
+<li>Know what you're looking for BEFORE opening the case</li>
+<li>Find the case on Jade or AustLII (free) or Westlaw (uni access)</li>
+<li>Copy full text into AI with case summary prompt (extract: admin history, parties, facts, issues, arguments, decision)</li>
+<li>Read AI summary first, THEN skim actual judgment (you'll get through it much faster)</li>
+<li>Identify: ratio decidendi (binding principle) + obiter dicta (persuasive commentary)</li>
+<li>Note prior authorities cited (useful for building your own arguments)</li>
+<li>Always distinguish the court's DECISION from its ORDERS (they can differ!)</li>
+</ol>
+</div>
+
 <div class="tip">
-<strong>💡 Pro tip:</strong> Start with AustLII or Jade for free case searching, then use Westlaw/LexisNexis for commentary and deeper analysis. Always check the official legislation sites for current versions of Acts.
+<strong>💡 Pro tips from Tutor Session 3:</strong><br>
+• Always verify AustLII/Jade against official legislation sites for currency<br>
+• Use the version of the Act in force at the TIME OF CONDUCT, not today's version<br>
+• Definitions in an Act may only apply to the Part they appear in<br>
+• Watch for determinative words: AND, OR, MUST, MAY, UNLESS<br>
+• Don't stop reading after finding elements: defences/exceptions often follow below<br>
+• Stick to lecturer-provided cases only: don't expand the case list yourself
 </div>
 
 </div>
