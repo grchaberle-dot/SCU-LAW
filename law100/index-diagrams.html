@@ -12,14 +12,6 @@ body{font-family:'Patrick Hand',cursive;background:oklch(95% 0.015 160);color:ok
 h1{font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3.2rem);color:oklch(45% 0.18 160);text-shadow:3px 3px 0 oklch(85% 0.08 50);margin-bottom:0.3rem}
 .subtitle{font-family:'Caveat',cursive;font-size:1.3rem;color:oklch(50% 0.12 280);margin-bottom:2rem}
 .nav-back{display:inline-block;background:oklch(55% 0.18 160);color:white;padding:0.4rem 1rem;border-radius:20px;text-decoration:none;font-family:'Bangers';font-size:1.1rem;margin-bottom:1.5rem}
-.session-link{display:flex;align-items:center;gap:14px;padding:16px 20px;margin-bottom:16px;border-radius:12px;background:oklch(92% 0.05 160);border:2px solid oklch(75% 0.08 160);text-decoration:none;color:oklch(25% 0.01 280);transition:transform 0.15s,box-shadow 0.15s}
-.session-link:hover{transform:translateX(4px);box-shadow:0 3px 10px oklch(50% .05 160/.12)}
-.session-link .icon{font-size:1.4rem}
-.session-link .info{flex:1}
-.session-link .title{font-weight:700;font-size:1.05rem}
-.session-link .desc{font-size:.88rem;color:oklch(45% .04 280);margin-top:2px}
-.session-tag{font-family:'Caveat',cursive;font-size:.8rem;padding:2px 8px;border-radius:8px;background:oklch(92% 0.08 90);font-weight:700}
-.section-divider{font-family:'Bangers',cursive;font-size:1.1rem;color:oklch(40% .12 160);margin:28px 0 12px}
 .diagram-card{background:oklch(99% 0.005 160);border:2px solid oklch(85% 0.04 160);border-radius:16px;padding:1.5rem;margin-bottom:2rem}
 .diagram-card h2{font-family:'Bangers',cursive;font-size:1.5rem;color:oklch(40% 0.15 160);margin-bottom:1rem}
 .flowchart{display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:1rem 0}
@@ -27,7 +19,6 @@ h1{font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3.2rem);color:oklch(45
 .flow-node:hover{transform:scale(1.05);background:oklch(82% 0.12 160)}
 .flow-arrow{font-size:1.5rem;color:oklch(60% 0.1 160)}
 .flow-row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;align-items:center}
-.flow-vs{font-family:'Bangers';font-size:1.3rem;color:oklch(55% 0.2 30);padding:0 0.5rem}
 .detail-box{background:oklch(94% 0.04 200);padding:1rem;border-radius:8px;margin-top:1rem;display:none;animation:fadeIn 0.3s}
 .detail-box.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
@@ -51,11 +42,6 @@ h1{font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3.2rem);color:oklch(45
 <a href="../index.html" class="nav-back">Back to Portal</a>
 <h1>LAW100 Diagrams</h1>
 <p class="subtitle">Tap to explore. Interactive concept maps for Foundations of Law.</p>
-
-<p class="section-divider">🎓 Tutor Session Diagrams</p>
-<a href="https://run.clickup.ai/90161675879/9da61fd4-0341-4670-b5fe-b14f57bb9370/lesson3-case-law-legislation-diagrams.html" class="session-link"><span class="icon">📊</span><div class="info"><div class="title">Session 3: Case Law & Legislation (19 Aug)</div><div class="desc">4 interactive maps: Act Structure, Reading a Judgment, Finding Legislation decision tree, Ratio vs Obiter</div></div><span class="session-tag">NEW</span></a>
-
-<p class="section-divider">📖 Course Diagrams</p>
 
 <div class="diagram-card">
 <h2>Australian Court Hierarchy</h2>
