@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LAW101 - Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Patrick Hand',cursive;background:oklch(92% 0.04 320);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1.5rem 1rem;color:oklch(25% 0.02 280)}
+.nav-back{align-self:flex-start;display:inline-block;background:oklch(55% 0.18 320);color:white;padding:0.4rem 1rem;border-radius:20px;text-decoration:none;font-family:'Bangers';font-size:1.1rem;margin-bottom:1rem}
+h1{font-family:'Bangers',cursive;font-size:clamp(1.8rem,5vw,2.8rem);color:oklch(40% 0.18 320);text-shadow:2px 2px 0 oklch(85% 0.06 50);margin-bottom:0.3rem;text-align:center}
+.subtitle{font-family:'Caveat',cursive;font-size:1.1rem;color:oklch(50% 0.1 200);margin-bottom:1rem;text-align:center}
+.progress{font-family:system-ui;font-size:0.9rem;color:oklch(50% 0.05 280);margin-bottom:1rem}
+.card-container{perspective:1000px;width:100%;max-width:500px;height:320px;margin-bottom:1.5rem;cursor:pointer}
+.card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 0.5s cubic-bezier(0.25,1,0.5,1)}
+.card.flipped{transform:rotateY(180deg)}
+.card-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:2rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.card-front{background:oklch(98% 0.005 320);border:3px solid oklch(80% 0.1 320)}
+.card-back{background:oklch(95% 0.04 160);border:3px solid oklch(75% 0.1 160);transform:rotateY(180deg)}
+.card-label{font-family:'Bangers';font-size:0.9rem;color:oklch(60% 0.1 280);position:absolute;top:1rem;left:1.5rem}
+.card-front p{font-size:1.2rem;font-weight:600;line-height:1.5}
+.card-back p{font-size:1.05rem;line-height:1.6}
+.topic-tag{position:absolute;bottom:1rem;right:1.5rem;font-size:0.75rem;background:oklch(88% 0.06 280);padding:0.2rem 0.6rem;border-radius:4px;font-family:system-ui}
+.controls{display:flex;gap:1rem;align-items:center;margin-bottom:1rem}
+.btn{font-family:'Patrick Hand';font-size:1.1rem;padding:0.6rem 1.5rem;border:none;border-radius:12px;cursor:pointer;font-weight:700;transition:transform 0.15s}
+.btn:hover{transform:scale(1.05)}
+.btn-prev{background:oklch(85% 0.08 280);color:oklch(30% 0.05 280)}
+.btn-next{background:oklch(75% 0.15 160);color:white}
+.btn-shuffle{background:oklch(85% 0.08 50);color:oklch(30% 0.05 50);font-size:0.95rem;padding:0.5rem 1rem}
+.dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:500px}
+.dot{width:8px;height:8px;border-radius:50%;background:oklch(80% 0.05 280)}
+.dot.active{background:oklch(55% 0.2 320)}
+.tap-hint{font-size:0.85rem;color:oklch(55% 0.05 280);margin-top:0.5rem;font-style:italic}
+@media(max-width:500px){.card-container{height:280px}.card-front p{font-size:1.05rem}.card-back p{font-size:0.95rem}}
+</style>
+</head>
+<body>
+<a href="../index.html" class="nav-back">← Back to Hub</a>
+<h1>🃏 LAW101 Flashcards</h1>
+<p class="subtitle">Tap card to flip. Arrows to navigate.</p>
+<p class="progress" id="progress">1 / 40</p>
+
+<div class="card-container" id="cardContainer">
+<div class="card" id="card">
+<div class="card-face card-front">
+<span class="card-label">QUESTION</span>
+<p id="question"></p>
+<span class="topic-tag" id="topicFront"></span>
+</div>
+<div class="card-face card-back">
+<span class="card-label">ANSWER</span>
+<p id="answer"></p>
+<span class="topic-tag" id="topicBack"></span>
+</div>
+</div>
+</div>
+
+<div class="controls">
+<button class="btn btn-prev" onclick="prev()">← Prev</button>
+<button class="btn btn-shuffle" onclick="shuffle()">🔀 Shuffle</button>
+<button class="btn btn-next" onclick="next()">Next →</button>
+</div>
+<div class="dots" id="dots"></div>
+<p class="tap-hint">Tap the card to reveal the answer</p>
+
+<script>
+const cards=[
+{q:"What are the 6 core characteristics of liberalism (Leiboff & Thomas)?",a:"1. Liberty (positive & negative)\n2. Individualism\n3. Equality\n4. Rights\n5. Rule of Law\n6. Public/Private spheres",t:"Topic 1"},
+{q:"What is negative liberty?",a:"Freedom FROM constraint/interference. The state leaves you alone. Limited government intrusion. E.g. Coco v The Queen (1994).",t:"Topic 1"},
+{q:"What is positive liberty?",a:"Freedom TO do things. The state actively promotes freedoms and enables individuals to make rational choices. E.g. welfare, education, healthcare.",t:"Topic 1"},
+{q:"What is JS Mill's Harm Principle?",a:"The only purpose for which power can be rightfully exercised over any member of a civilised community, against his will, is to prevent harm to others. His own good is not sufficient warrant.",t:"Topic 1"},
+{q:"What is Nozick's 'nightwatchman state'?",a:"A minimal state limited to protecting citizens from violence, theft, and fraud. Ultra-negative liberty position. State should not intervene in economy or aid others.",t:"Topic 1"},
+{q:"Deontological vs Teleological rights?",a:"Deontological: Rights are inherent/pre-legal, exist by virtue of being human (Kant, Locke).\nTeleological: Rights are created by law to achieve desirable outcomes (utilitarianism, Bentham).",t:"Topic 1"},
+{q:"What are the 3 social contract theorists and their key positions?",a:"Hobbes: State of nature brutal, need absolute sovereign.\nLocke: State of nature governed by natural law, limited government, can revolt.\nRousseau: State of nature pure, need normative contract to fix corrupt primitive contract.",t:"Topic 1"},
+{q:"What are Dicey's 3 principles of the Rule of Law?",a:"1. Absolute supremacy of regular law over arbitrary power\n2. Equality before the law\n3. Constitution is consequence (not source) of individual rights as enforced by courts.",t:"Topic 2"},
+{q:"Thin (Formal) vs Thick (Substantive) Rule of Law?",a:"Thin (Raz): No moral judgment on content. Just: supremacy, equality, law is clear/general/prospective/stable.\nThick (Bingham): Must ALSO protect human rights, access to justice, fair procedures.",t:"Topic 2"},
+{q:"What is legal formalism?",a:"Law as self-contained system. Judges apply rules mechanically without reference to external considerations (values, social consequences). Promotes predictability and democratic legitimacy.",t:"Topic 2"},
+{q:"Name 3 critiques of legal formalism.",a:"1. Impossible (multiple laws apply, judges have ideology)\n2. Undesirable (morals evolve, can produce absurd results)\n3. Hides deception ('I had no choice, law constrained me')",t:"Topic 2"},
+{q:"What did the Communist Party Case (1951) establish?",a:"Rule of law 'forms an assumption' of the Constitution (Dixon J). Federal parliament cannot enact laws outside enumerated powers. High Court decides if law is within power.",t:"Topic 2"},
+{q:"What is the difference between Rule of Law and Rule BY Law?",a:"Rule of Law: Government bound by law, separation of powers, equality.\nRule BY Law: State uses law to control citizens but isn't itself bound. Tool of political power (e.g. authoritarian regimes).",t:"Topic 2"},
+{q:"Non-positivism vs Legal Positivism on law and morality?",a:"Non-positivism (Natural Law): Law must align with moral imperatives. Immoral law is not law (Aquinas).\nPositivism (Hart/Austin): Law is law once properly enacted. No necessary connection to morality.",t:"Topic 3"},
+{q:"What is Hart's 'minimum content of natural law'?",a:"Even positivists accept law needs minimum moral content for survival (don't kill, don't steal). Without this, no reason to obey. But moral evaluation still separate from legal validity.",t:"Topic 3"},
+{q:"Consensus vs Conflict theory of law emergence?",a:"Consensus: Law reflects shared values (functionalism, rationalism).\nConflict: Society built on power imbalances. Law serves dominant class interests (Marx). State not neutral.",t:"Topic 3"},
+{q:"What are moral panics (Cohen)?",a:"A condition/group defined as threat to society. Media amplifies through stereotyping/exaggeration. Moral barricades manned by authorities. Used to divert from real problems or justify restrictive laws.",t:"Topic 3"},
+{q:"What is Public Choice Theory?",a:"Economic analysis of political decision-making. People behave in politics as in markets: self-interested, rational, utility maximisers. Explains why bureaucrats follow own interests over public good.",t:"Topic 3"},
+{q:"Formal vs Substantive equality?",a:"Formal: Same treatment for everyone (equality of opportunity).\nSubstantive: Equality of outcome. Recognises some need different treatment due to special needs, history of discrimination.",t:"Topic 4"},
+{q:"What did Kruger v Commonwealth (1997) decide about equality?",a:"No generalised requirement of 'substantive equality' in the Australian Constitution. No implied right of general legal equality. RoL requires law applied to all regardless of rank, but doesn't require non-discriminatory operation.",t:"Topic 4"},
+{q:"Who is Margaret Thornton's 'benchmark figure'?",a:"A white, Anglo-Celtic, heterosexual male who falls within acceptable parameters of physical and intellectual normalcy, supports mainstream Christian beliefs, fits middle-to-right politically.",t:"Topic 4"},
+{q:"Direct vs Indirect discrimination?",a:"Direct: Overt act of treating differently because of protected attribute.\nIndirect: Neutral rule that disproportionately excludes certain groups (systemic). E.g. height requirements based on male norms.",t:"Topic 4"},
+{q:"Name the 5 types of feminist theory.",a:"1. Liberal (formal equality, remove barriers)\n2. Radical/MacKinnon (law = male dominance)\n3. Cultural/Gilligan (ethics of care vs logic of justice)\n4. Socialist (gendered division supports capitalism)\n5. Postmodern (rejects grand narratives, intersectionality)",t:"Topic 5"},
+{q:"What is the public/private dichotomy (feminist critique)?",a:"Law intervenes in public sphere but not private. Feminist critique: this masks domestic violence, marital rape, unpaid labour. 'Man's home is his castle' protects male power in family.",t:"Topic 5"},
+{q:"What is Carole Pateman's 'Sexual Contract'?",a:"Beneath the social contract is a sexual contract. The original contract constitutes men's freedom and women's subjection. Locke assumed women subservient as sexual property of men.",t:"Topic 5"},
+{q:"What was terra nullius and when was it rejected?",a:"'Land belonging to no one.' Used to rationalise colonisation of Australia (no cultivation = no ownership). Rejected as legal fiction in Mabo v Queensland (No.2) (1992).",t:"Topic 6"},
+{q:"What did R v Murrell (1836) decide?",a:"Aboriginal peoples subject to British law for offences committed inter se. Court found they had not attained sufficient 'civilisation' to be recognised as sovereign states governed by own laws.",t:"Topic 6"},
+{q:"What is Critical Race Theory (CRT)?",a:"Race is socially constructed. Law not objective or value neutral. Formal equality masks entrenched disadvantage. Racism is 'ordinary'. Law reflects perspective of white middle class as 'neutrality'.",t:"Topic 6"},
+{q:"What is Watson's 'Raw Law' (Indigenous Law)?",a:"From the Dreaming/creation. Unity of all living things. Obligations to renew land. Consensus, reciprocity, relationships. Contrasts Western: land ownership, accumulation, hierarchical patriarchy, adversarial punishment.",t:"Topic 7"},
+{q:"What did Walker v NSW (1994) decide?",a:"'All people should stand equal before the law.' Criminal law does not accommodate alternative body of law operating alongside it. Formal equality applied to criminal jurisdiction over Aboriginal people.",t:"Topic 7"},
+{q:"Arguments FOR recognition of Indigenous law?",a:"Self-determination (UNDRIP), cultural preservation, human rights, reduce incarceration, community empowerment, restorative justice, address colonial legacy.",t:"Topic 7"},
+{q:"Arguments AGAINST recognition of Indigenous law?",a:"Legal centralism (one law for all), equality before law, human rights conflicts (e.g. violence), difficulty of codification, rule of law principles, divisiveness, opens door to recognising other laws.",t:"Topic 7"},
+{q:"What are the 3 generations of human rights?",a:"1st: Civil & political (negative, ICCPR)\n2nd: Economic, social, cultural (positive, ICESCR)\n3rd: Collective/solidarity (self-determination, environment, development, UNDRIP)",t:"Topic 8"},
+{q:"State obligations under human rights (Shue)?",a:"1. Respect (refrain from violating)\n2. Protect (prevent third parties violating)\n3. Fulfil (ensure individuals can exercise full rights)",t:"Topic 8"},
+{q:"Arguments FOR an Australian Bill of Rights?",a:"Current protections inadequate, cement rights permanently, protect against majority tyranny, lagging other nations, commitment to international obligations, educates community.",t:"Topic 8"},
+{q:"Arguments AGAINST an Australian Bill of Rights?",a:"Responsible government sufficient, undermines parliamentary sovereignty, too much judicial power, can become outdated, more litigious, won't stop violations, villain's charter.",t:"Topic 8"},
+{q:"Marx's critique of the Rule of Law?",a:"Liberal ideals and RoL are ideological justifications for capitalism. True power is economic. Legal power exercised by those with economic power. Law = instrument of dominant class.",t:"Topic 9"},
+{q:"E.P. Thompson on the Rule of Law?",a:"RoL is 'an unqualified human good' and 'cultural achievement'. Allows class struggles to be played out within a system all parties accept, rather than by naked brutal warfare.",t:"Topic 9"},
+{q:"What is the definition of terrorism under s100.1 Criminal Code (Cth)?",a:"Action/threat that: (a) causes serious harm/damage/death/risk; (b) advances political/religious/ideological cause; (c) coerces/intimidates government or public. Excludes advocacy/protest/dissent.",t:"Topic 10"},
+{q:"How do counter-terrorism laws challenge liberalism?",a:"No harm principle breached by prevention. Preventive detention without crime. Control orders (low proof standard). Vague laws. Erosion of separation of powers. Guilt by association.",t:"Topic 10"},
+{q:"Globalisation OF law vs BY law?",a:"OF law: Domestic law unified/harmonised (e.g. copyright, anti-terrorism treaties).\nBY law: International agreements change domestic law (e.g. trade agreements force domestic reform). Australia is dualist: treaties need domestic legislation.",t:"Topic 11"}
+];
+let idx=0;
+function render(){const c=cards[idx];document.getElementById('question').textContent=c.q;document.getElementById('answer').textContent=c.a;document.getElementById('topicFront').textContent=c.t;document.getElementById('topicBack').textContent=c.t;document.getElementById('progress').textContent=(idx+1)+' / '+cards.length;document.getElementById('card').classList.remove('flipped');renderDots()}
+function renderDots(){const d=document.getElementById('dots');d.innerHTML='';cards.forEach((_,i)=>{const dot=document.createElement('div');dot.className='dot'+(i===idx?' active':'');d.appendChild(dot)})}
+function next(){idx=(idx+1)%cards.length;render()}
+function prev(){idx=(idx-1+cards.length)%cards.length;render()}
+function shuffle(){for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]]}idx=0;render()}
+document.getElementById('cardContainer').addEventListener('click',()=>{document.getElementById('card').classList.toggle('flipped')});
+render();
+</script>
+</body>
+</html>
