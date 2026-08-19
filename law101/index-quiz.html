@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LAW101 - Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Patrick Hand',cursive;background:oklch(94% 0.03 280);min-height:100vh;padding:1.5rem 1rem;color:oklch(22% 0.02 280)}
+.container{max-width:700px;margin:0 auto}
+.nav-back{display:inline-block;background:oklch(55% 0.18 280);color:white;padding:0.4rem 1rem;border-radius:20px;text-decoration:none;font-family:'Bangers';font-size:1.1rem;margin-bottom:1rem}
+h1{font-family:'Bangers',cursive;font-size:clamp(1.8rem,5vw,2.8rem);color:oklch(40% 0.18 280);text-shadow:2px 2px 0 oklch(85% 0.06 50);margin-bottom:0.3rem}
+.subtitle{font-family:'Caveat',cursive;font-size:1.1rem;color:oklch(50% 0.1 320);margin-bottom:1.5rem}
+.score-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;font-family:system-ui;font-size:0.9rem;color:oklch(45% 0.05 280)}
+.score-bar .score{font-weight:700;font-size:1.1rem;color:oklch(40% 0.15 160)}
+.q-card{background:oklch(99% 0.005 280);border:2px solid oklch(82% 0.06 280);border-radius:14px;padding:1.5rem;margin-bottom:1rem}
+.q-card .topic{font-size:0.75rem;background:oklch(88% 0.06 320);display:inline-block;padding:0.15rem 0.5rem;border-radius:4px;margin-bottom:0.8rem;font-family:system-ui}
+.q-card .question{font-size:1.15rem;font-weight:700;margin-bottom:1rem;line-height:1.5}
+.options{display:flex;flex-direction:column;gap:0.5rem}
+.opt{padding:0.8rem 1rem;border:2px solid oklch(82% 0.05 280);border-radius:10px;cursor:pointer;transition:all 0.2s;font-size:1rem;background:oklch(98% 0.005 280)}
+.opt:hover:not(.disabled){background:oklch(94% 0.04 200);border-color:oklch(70% 0.1 200)}
+.opt.correct{background:oklch(88% 0.12 160);border-color:oklch(60% 0.18 160);color:oklch(25% 0.08 160)}
+.opt.wrong{background:oklch(90% 0.08 30);border-color:oklch(65% 0.15 30);color:oklch(30% 0.08 30)}
+.opt.disabled{cursor:default;opacity:0.7}
+.explanation{margin-top:0.8rem;padding:0.8rem 1rem;background:oklch(94% 0.03 160);border-radius:8px;font-size:0.95rem;display:none;line-height:1.5}
+.explanation.show{display:block}
+.btn-next{display:none;margin-top:1rem;font-family:'Patrick Hand';font-size:1.1rem;padding:0.6rem 2rem;border:none;border-radius:12px;cursor:pointer;background:oklch(55% 0.18 280);color:white;font-weight:700}
+.btn-next.show{display:inline-block}
+.results{text-align:center;padding:2rem;background:oklch(98% 0.005 280);border-radius:16px;border:2px solid oklch(82% 0.06 160)}
+.results h2{font-family:'Bangers';font-size:2rem;color:oklch(40% 0.15 160);margin-bottom:0.5rem}
+.results p{font-size:1.1rem;margin-bottom:1rem}
+.btn-restart{font-family:'Patrick Hand';font-size:1.1rem;padding:0.6rem 2rem;border:none;border-radius:12px;cursor:pointer;background:oklch(55% 0.18 320);color:white;font-weight:700}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="../index.html" class="nav-back">← Back to Hub</a>
+<h1>❓ LAW101 Quiz</h1>
+<p class="subtitle">MCQ with instant feedback. 30 questions across all topics.</p>
+<div class="score-bar"><span id="qNum">Question 1 of 30</span><span class="score" id="scoreDisplay">Score: 0</span></div>
+<div id="quizArea"></div>
+</div>
+<script>
+const questions=[
+{q:"Which philosopher proposed the 'nightwatchman state'?",opts:["John Locke","Robert Nozick","JS Mill","Thomas Hobbes"],correct:1,explain:"Nozick advocated for a minimal state limited to protecting citizens from violence, theft and fraud.",topic:"Topic 1"},
+{q:"The Harm Principle was articulated by:",opts:["Immanuel Kant","Jeremy Bentham","John Stuart Mill","John Locke"],correct:2,explain:"Mill argued in On Liberty (1859) that power can only be rightfully exercised to prevent harm to others.",topic:"Topic 1"},
+{q:"Positive liberty means:",opts:["Freedom from government interference","Freedom to pursue goals with state assistance","The right to own property","Freedom of speech"],correct:1,explain:"Positive liberty is 'freedom to' where the state actively promotes conditions enabling individuals to make rational choices.",topic:"Topic 1"},
+{q:"Deontological rights are:",opts:["Created by legislation for desirable outcomes","Based on utilitarian calculations","Inherent to being human, pre-legal","Only enforceable in common law"],correct:2,explain:"Deontological rights (Kant) exist by virtue of being human, independent of any law or government.",topic:"Topic 1"},
+{q:"Which social contract theorist saw the state of nature as 'pure and peaceful'?",opts:["Hobbes","Locke","Rousseau","Nozick"],correct:2,explain:"Rousseau believed the state of nature was pure but a primitive social contract corrupted it, requiring a normative contract to fix.",topic:"Topic 1"},
+{q:"Dicey's Rule of Law does NOT include:",opts:["Supremacy of regular law","Equality before the law","Protection of human rights","Rights as consequence of judicial decisions"],correct:2,explain:"Protection of human rights is Bingham's thick/substantive RoL. Dicey's formal RoL focuses on supremacy, equality, and rights from courts.",topic:"Topic 2"},
+{q:"Legal formalism means judges should:",opts:["Consider social consequences of decisions","Apply rules mechanically without external considerations","Create new law where gaps exist","Balance competing interests"],correct:1,explain:"Formalism sees law as self-contained. Judges apply pre-formed rules without reference to personal values or social outcomes.",topic:"Topic 2"},
+{q:"The Communist Party Case (1951) established that:",opts:["The Communist Party was lawful","Rule of law forms an assumption of the Constitution","States have unlimited legislative power","Executive power is absolute"],correct:1,explain:"Dixon J: 'the rule of law forms an assumption' of the Constitution. Federal parliament cannot enact laws outside enumerated powers.",topic:"Topic 2"},
+{q:"The 'thin' Rule of Law (Raz) is characterised by:",opts:["Must include human rights protection","No moral judgment on content of laws","Democratic governance required","Social welfare minimum standards"],correct:1,explain:"Raz's thin/formal RoL requires supremacy, equality, and specific traits (clear, prospective, stable) but makes no judgment on law's moral content.",topic:"Topic 2"},
+{q:"Fuller's requirements for legal formality include all EXCEPT:",opts:["Generality","Prospectivity","Democratic mandate","Stability"],correct:2,explain:"Fuller required laws be general, promulgated, clear, specific, prospective, practicable and stable. Democratic mandate is not one of his requirements.",topic:"Topic 2"},
+{q:"Hart's position on law and morality is:",opts:["Immoral law is not law","Law and morals should be sharply distinguished","All law must reflect natural law","Morality determines legal validity"],correct:1,explain:"Hart (positivist): law and morality are separate. Law is valid once properly enacted regardless of moral content. But minimum content needed for survival.",topic:"Topic 3"},
+{q:"Moral panics are amplified primarily by:",opts:["The judiciary","The media","Academic institutions","Religious organisations"],correct:1,explain:"Cohen: media is 'carrier and producer of moral panic' through stereotyping, exaggerating, and misrepresenting deviance.",topic:"Topic 3"},
+{q:"Public Choice Theory assumes political actors are:",opts:["Altruistic public servants","Self-interested rational utility maximisers","Guided by natural law","Formalist in approach"],correct:1,explain:"PCT assumes people behave in political decision-making as they would in the market: self-interested, rational, utility maximisers.",topic:"Topic 3"},
+{q:"Formal equality means:",opts:["Equality of outcome","Same treatment for everyone","Affirmative action","Recognising structural disadvantage"],correct:1,explain:"Formal equality = same treatment for everyone (equality of opportunity). Treats like cases alike regardless of background.",topic:"Topic 4"},
+{q:"Kruger v Commonwealth (1997) found:",opts:["An implied right to substantive equality exists","No implied right of general legal equality in the Constitution","The Racial Discrimination Act is unconstitutional","Formal equality is constitutionally required"],correct:1,explain:"No generalised requirement of substantive equality. The common law has never required equal or non-discriminatory operation of laws.",topic:"Topic 4"},
+{q:"Indirect discrimination occurs when:",opts:["Someone is overtly treated differently","A neutral rule disproportionately excludes certain groups","Discrimination is intentional","A person is directly targeted"],correct:1,explain:"Indirect discrimination: neutral rule/policy that has unfair effect on people sharing a particular attribute (e.g. height requirements based on male norms).",topic:"Topic 4"},
+{q:"Radical feminism (MacKinnon) argues law is:",opts:["Gender-neutral but poorly applied","A tool serving male interests through dominance","Inherently fair but needs reform","Based on ethics of care"],correct:1,explain:"MacKinnon: Law created by males in their image. Not about gender difference but DOMINANCE. Women as embodiments of men's sexual needs.",topic:"Topic 5"},
+{q:"The public/private dichotomy is critiqued by feminists because:",opts:["It gives women too much power","It masks domestic violence by keeping it 'private'","It promotes positive liberty","It advances substantive equality"],correct:1,explain:"Non-interference in private sphere masks DV, marital rape, unpaid labour. 'Man's home is his castle' protects male power.",topic:"Topic 5"},
+{q:"Carol Gilligan's 'ethic of care' contrasts with:",opts:["Natural law theory","The logic of justice and separateness","Legal positivism","Utilitarianism"],correct:1,explain:"Gilligan: men favour 'logic of justice' (rights, separateness, hierarchy). Women favour 'ethics of care' (relationships, connectedness, context).",topic:"Topic 5"},
+{q:"Terra nullius was formally rejected in:",opts:["R v Murrell (1836)","Mabo v Queensland No.2 (1992)","Walker v NSW (1994)","Coe v Commonwealth (1993)"],correct:1,explain:"Mabo (No.2) rejected terra nullius as a legal fiction and recognised native title based on traditional laws and customs.",topic:"Topic 6"},
+{q:"Critical Race Theory holds that:",opts:["Law is objective and value-neutral","Racism is ordinary and law reflects white middle class perspective","Formal equality has eliminated racial disadvantage","Race is a biological fact"],correct:1,explain:"CRT: racism is ordinary/normalised. Law not objective. Formal equality masks entrenched disadvantage. Race is socially constructed.",topic:"Topic 6"},
+{q:"The Stolen Generations were a result of:",opts:["Assimilation policy only","Protection legislation enabling removal of Aboriginal children","The 1967 referendum","Native title claims"],correct:1,explain:"Between 1910-1970, estimated 1:3 to 1:10 Indigenous children removed under 'protection' and 'assimilation' policies.",topic:"Topic 6"},
+{q:"Walker v NSW (1994) established that:",opts:["Aboriginal customary law operates alongside criminal law","Criminal law does NOT accommodate alternative law operating alongside it","Native title extends to criminal matters","Aboriginal people are not subject to criminal law"],correct:1,explain:"'All people should stand equal before the law.' Australian criminal law does not accommodate an alternative body of law.",topic:"Topic 7"},
+{q:"Watson's 'Raw Law' emphasises:",opts:["Individual property rights","Unity of all living things and obligations to country","Adversarial justice","Written codification"],correct:1,explain:"Indigenous law from the Dreaming. Unity of living things, obligations to renew land, consensus, reciprocity, relationships with country.",topic:"Topic 7"},
+{q:"UNDRIP Article 3 provides:",opts:["Right to compensation","Right to self-determination","Right to trial by jury","Right to education"],correct:1,explain:"Indigenous peoples have the right to self-determination. They freely determine their political status and pursue economic, social and cultural development.",topic:"Topic 7"},
+{q:"1st generation human rights are:",opts:["Economic and social rights","Civil and political rights","Collective solidarity rights","Environmental rights"],correct:1,explain:"1st gen: civil & political (negative rights). Right to life, fair trial, vote, free speech, religion. ICCPR. Liberal foundations.",topic:"Topic 8"},
+{q:"Shue's state obligations include all EXCEPT:",opts:["Respect","Protect","Fulfil","Legislate"],correct:3,explain:"Shue: Respect (refrain from violating), Protect (prevent third parties violating), Fulfil (ensure individuals can exercise rights). 'Legislate' is not a category.",topic:"Topic 8"},
+{q:"Section 116 of the Australian Constitution protects:",opts:["Freedom of speech","Freedom of religion","Right to a fair trial","Right to equality"],correct:1,explain:"s116: Commonwealth shall not make any law establishing religion, imposing religious observance, or prohibiting free exercise of religion.",topic:"Topic 8"},
+{q:"E.P. Thompson described the Rule of Law as:",opts:["A tool of the bourgeoisie","An unqualified human good and cultural achievement","An ideological fiction","Incompatible with socialism"],correct:1,explain:"Thompson: RoL allows class struggles within a system all parties accept, rather than by naked brutal warfare. It's a cultural achievement.",topic:"Topic 9"},
+{q:"Under s100.1 Criminal Code, a terrorist act must advance:",opts:["A financial cause","A political, religious or ideological cause","A personal vendetta","A commercial interest"],correct:1,explain:"Terrorist act requires intention of advancing political, religious or ideological cause AND coercing/intimidating government or public.",topic:"Topic 10"},
+{q:"Australia's relationship with international law is:",opts:["Monist (international law automatically applies)","Dualist (treaties need domestic legislation)","International law always prevails","No relationship exists"],correct:1,explain:"Australia is strictly dualist: international and domestic law are separate systems. Treaties have no effect until implemented by domestic legislation.",topic:"Topic 11"}
+];
+let current=0,score=0;
+function render(){const area=document.getElementById('quizArea');if(current>=questions.length){area.innerHTML=`<div class="results"><h2>Quiz Complete!</h2><p>You scored <strong>${score}/${questions.length}</strong></p><p>${score>=25?'Excellent! You know this unit well.':score>=18?'Good work! Review the topics you missed.':'Keep studying. Review the summary and try again.'}</p><button class="btn-restart" onclick="restart()">Try Again</button></div>`;return}
+const q=questions[current];let html=`<div class="q-card"><span class="topic">${q.topic}</span><p class="question">${q.q}</p><div class="options">`;
+q.opts.forEach((o,i)=>{html+=`<div class="opt" id="opt${i}" onclick="answer(${i})">${o}</div>`});
+html+=`</div><div class="explanation" id="explain">${q.explain}</div><button class="btn-next" id="btnNext" onclick="nextQ()">Next →</button></div>`;
+area.innerHTML=html;document.getElementById('qNum').textContent=`Question ${current+1} of ${questions.length}`;document.getElementById('scoreDisplay').textContent=`Score: ${score}`}
+function answer(i){const q=questions[current];document.querySelectorAll('.opt').forEach((el,idx)=>{el.classList.add('disabled');if(idx===q.correct)el.classList.add('correct');if(idx===i&&i!==q.correct)el.classList.add('wrong')});if(i===q.correct)score++;document.getElementById('explain').classList.add('show');document.getElementById('btnNext').classList.add('show');document.getElementById('scoreDisplay').textContent=`Score: ${score}`}
+function nextQ(){current++;render()}
+function restart(){current=0;score=0;questions.sort(()=>Math.random()-0.5);render()}
+render();
+</script>
+</body>
+</html>
