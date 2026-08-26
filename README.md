@@ -1,4 +1,4 @@
-# UNE LAW Study Materials
+# SCI LAW Study Materials
 
 🎓 **Georgia Haberle** | BCrim/BLaws | University of New England
 
