@@ -50,6 +50,11 @@ main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
 .res-link-featured{border-color:oklch(70% 0.1 330);background:oklch(95% 0.03 330);border-width:3px}
 .res-link-featured:hover{background:oklch(92% 0.05 330)}
 
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0.8rem;margin-bottom:2.5rem}
+.ref-link{display:flex;align-items:center;gap:0.5rem;padding:0.8rem 1rem;border:2px solid oklch(82% 0.06 290);border-radius:10px;text-decoration:none;color:oklch(30% 0.05 280);font-weight:600;font-size:0.95rem;background:oklch(96% 0.02 290);transition:transform 0.15s}
+.ref-link:hover{transform:scale(1.03);background:oklch(92% 0.04 290)}
+.ref-link span{font-size:1.2rem}
+
 @media(max-width:600px){.tiles{grid-template-columns:1fr 1fr}.header h1{font-size:2.2rem}.sessions-grid{grid-template-columns:1fr}}
 @media(max-width:400px){.tiles{grid-template-columns:1fr}}
 </style>
@@ -100,6 +105,16 @@ main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
 </div>
 </div>
 
+</div>
+
+<p class="section-label"><span>📋</span> REFERENCE CARDS & PRACTICE</p>
+
+<div class="ref-grid">
+<a href="reference-cards/torts-qrc.pdf" class="ref-link"><span>⚖️</span> LexisNexis Torts (6pg)</a>
+<a href="reference-cards/statutory-interpretation-qrc.pdf" class="ref-link"><span>📜</span> LexisNexis Statutory Interpretation (6pg)</a>
+<a href="reference-cards/admin-law-qrc.pdf" class="ref-link"><span>🏛️</span> LexisNexis Administrative Law (6pg)</a>
+<a href="reference-cards/aggravated-assaults-consent.pdf" class="ref-link"><span>📄</span> Aggravated Assaults & Consent</a>
+<a href="reference-cards/2020-torts-exam-jacinda.pdf" class="ref-link"><span>📝</span> 2020 Torts Exam (Jacinda's Housing)</a>
 </div>
 
 <p class="section-label"><span>📦</span> RESOURCES</p>
