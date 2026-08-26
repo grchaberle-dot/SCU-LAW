@@ -8,67 +8,52 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Patrick Hand',cursive;background:oklch(96% 0.01 280);min-height:100vh;color:oklch(20% 0.02 280)}
-
 .header{background:linear-gradient(180deg,oklch(88% 0.06 290) 0%,oklch(92% 0.04 310) 100%);padding:2.5rem 1rem 2rem;text-align:center;border-bottom:3px solid oklch(82% 0.08 290)}
 h1{font-family:'Bangers',cursive;font-size:clamp(2.5rem,7vw,4.2rem);color:oklch(15% 0.02 280);letter-spacing:0.02em;margin-bottom:0.3rem}
 .tagline{font-family:'Caveat',cursive;font-size:1.3rem;color:oklch(40% 0.08 280)}
 .tagline2{font-family:'Patrick Hand',cursive;font-size:1rem;color:oklch(50% 0.05 280);margin-top:0.2rem}
-
 main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
-
 .section-label{font-family:'Bangers',cursive;font-size:1.4rem;color:oklch(25% 0.02 280);margin-bottom:1.2rem}
 .section-label span{margin-right:0.4rem}
-
 .units-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-bottom:2.5rem}
 .unit-card{background:oklch(92% 0.05 350);border-radius:16px;padding:1.5rem;border:2px solid oklch(85% 0.06 350)}
 .unit-card:nth-child(2){background:oklch(92% 0.04 200);border-color:oklch(85% 0.05 200)}
 .unit-header{margin-bottom:1rem}
 .unit-header h2{font-family:'Bangers',cursive;font-size:1.7rem;color:oklch(20% 0.02 280);display:inline}
 .unit-header .unit-name{font-family:'Caveat',cursive;font-size:1.1rem;color:oklch(45% 0.08 280);margin-left:0.5rem}
-
 .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:0.6rem}
 .tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.3rem;padding:0.8rem 0.4rem;border:2px dashed oklch(75% 0.08 350);border-radius:10px;text-decoration:none;color:oklch(30% 0.05 280);font-size:0.95rem;font-weight:600;text-align:center;background:oklch(98% 0.005 280);transition:transform 0.15s,background 0.15s}
 .tile:hover{transform:scale(1.05);background:oklch(95% 0.03 160)}
 .tile .tile-icon{font-size:1.5rem}
 .tile-soon{opacity:0.4;pointer-events:none;border-style:dotted}
 .tile-active{border-style:solid;border-color:oklch(70% 0.08 160);opacity:1;pointer-events:auto}
-
 .ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0.8rem;margin-bottom:2.5rem}
 .ref-link{display:flex;align-items:center;gap:0.5rem;padding:0.8rem 1rem;border:2px solid oklch(82% 0.06 290);border-radius:10px;text-decoration:none;color:oklch(30% 0.05 280);font-weight:600;font-size:0.95rem;background:oklch(96% 0.02 290);transition:transform 0.15s}
 .ref-link:hover{transform:scale(1.03);background:oklch(92% 0.04 290)}
 .ref-link span{font-size:1.2rem}
-
 .res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.7rem}
 .res-link{display:flex;align-items:center;gap:0.4rem;padding:0.8rem 1rem;border:2px solid oklch(82% 0.06 50);border-radius:10px;text-decoration:none;color:oklch(30% 0.05 280);font-weight:600;font-size:0.95rem;background:oklch(98% 0.01 50);transition:transform 0.15s}
 .res-link:hover{transform:scale(1.03);background:oklch(94% 0.04 50)}
 .res-link span{font-size:1.2rem}
 .res-link-featured{border-color:oklch(70% 0.1 330);background:oklch(95% 0.03 330);border-width:3px}
 .res-link-featured:hover{background:oklch(92% 0.05 330)}
-
 @media(max-width:600px){.tiles{grid-template-columns:1fr 1fr}.header h1{font-size:2.2rem}}
 @media(max-width:400px){.tiles{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
 <div class="header">
 <h1>SCU LAW STUDY HUB</h1>
 <p class="tagline">Georgia's LLB Interactive Materials</p>
 <p class="tagline2">Bookmark this one page. Everything lives here.</p>
 </div>
-
 <main>
-
 <p class="section-label"><span>🌟</span> MY SYSTEM</p>
-
 <div class="res-grid" style="margin-bottom:2.5rem">
 <a href="resources/my-study-system.html" class="res-link res-link-featured"><span>🏆</span> Georgia's Law School Domination System</a>
 </div>
-
 <p class="section-label"><span>🎓</span> UNITS</p>
-
 <div class="units-grid">
-
 <div class="unit-card">
 <div class="unit-header">
 <h2>LEGL1001</h2>
@@ -76,12 +61,12 @@ main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
 </div>
 <div class="tiles">
 <a href="LEGL1001/week1-workshop-australian-legal-system.html" class="tile tile-active"><span class="tile-icon">📚</span>Week 1</a>
+<a href="LEGL1001/judicial-reasoning-precedent.html" class="tile tile-active"><span class="tile-icon">🏛️</span>Precedent</a>
 <a href="LEGL1001/plain-english-legal-writing.html" class="tile tile-active"><span class="tile-icon">✍️</span>Plain English</a>
 <a href="LEGL1001/defamation-letter-example.html" class="tile tile-active"><span class="tile-icon">📨</span>Defamation</a>
 <a href="LEGL1001/practice-exam-1.html" class="tile tile-active"><span class="tile-icon">📝</span>Practice Exam</a>
 </div>
 </div>
-
 <div class="unit-card">
 <div class="unit-header">
 <h2>LAWS1001</h2>
@@ -94,11 +79,8 @@ main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
 <a href="#" class="tile tile-soon"><span class="tile-icon">🖼️</span>Diagrams</a>
 </div>
 </div>
-
 </div>
-
 <p class="section-label"><span>📋</span> REFERENCE CARDS & PRACTICE</p>
-
 <div class="ref-grid">
 <a href="reference-cards/torts-qrc.html" class="ref-link"><span>⚖️</span> LexisNexis Torts (6pg)</a>
 <a href="reference-cards/statutory-interpretation-qrc.html" class="ref-link"><span>📜</span> LexisNexis Statutory Interpretation (6pg)</a>
@@ -106,9 +88,7 @@ main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
 <a href="reference-cards/aggravated-assaults-consent.html" class="ref-link"><span>📄</span> Aggravated Assaults & Consent</a>
 <a href="reference-cards/2020-torts-exam-jacinda.html" class="ref-link"><span>📝</span> 2020 Torts Exam (Jacinda's Housing)</a>
 </div>
-
 <p class="section-label"><span>📦</span> RESOURCES</p>
-
 <div class="res-grid">
 <a href="resources/study-strategies.html" class="res-link"><span>🎯</span> Study Strategies Guide</a>
 <a href="resources/session-docs-recordings.html" class="res-link"><span>🎥</span> Session Docs & Recordings</a>
@@ -117,7 +97,6 @@ main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
 <a href="resources/legal-databases.html" class="res-link"><span>📚</span> Legal Research DBs</a>
 <a href="archive.html" class="res-link"><span>📦</span> Archive (Pre-SCU Materials)</a>
 </div>
-
 </main>
 </body>
 </html>
