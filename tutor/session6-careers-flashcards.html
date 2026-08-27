@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Session 6 Flashcards &middot; SCU LAW Study Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="session6.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">&larr; Study Hub</a>
+<div class="plate">
+<p class="kicker">Chambers of &middot; Tutor Session 06 &middot; 27 Aug 2026</p>
+<h1>Careers &amp; Career Planning</h1>
+<p class="sub">35 cards &middot; answer out loud before you untie it</p>
+</div>
+<div class="rail" id="rail"></div>
+<div id="stage"></div>
+<div id="nav" class="row"></div>
+</div>
+<footer>Built from the 27 Aug 2026 tutor session with Abdoullah &mdash; the final session of the series.<br>
+Salary and fee figures are his, spoken from memory. Victorian examples are illustrative; your jurisdiction is NSW. Verify before you rely on any of it.</footer>
+<script>
+const CARDS = [
+{t:"The point of the session",q:"What was Abdoullah actually trying to do in this session?",a:"Not plan your whole career. Surface the preferences that will steer which pathway you chase, then hand you universal steps that work in private, public, advocacy or research."},
+{t:"Decision made",q:"What did you rule out in the first two minutes?",a:"Staying in your current industry in a legal role. Asked to choose, you said you'd do something completely different. That's one branch closed."},
+{t:"Fit",q:"Which of your answers made Abdoullah point you at the bar?",a:"Comfort with nitty-gritty detail (you already live in numbers), tolerance for short deadlines and overtime, and a preference for not depending on a team's output."},
+{t:"How the work arrives",q:"How does a barrister actually get work?",a:"A solicitor prepares a brief: a stack of documents setting out the issues plus an outline of what they want argued, and delivers it for a specific hearing."},
+{t:"The core difference",q:"Single biggest structural difference between a barrister and a solicitor?",a:"A barrister is not bound by the client's instructions. Duty runs to the court, so the barrister makes the final call on what argument to run."},
+{t:"Instructions vs judgement",q:"What was the stolen TV example illustrating?",a:"A solicitor came to court arguing his client took the TV back as payback for an earlier theft. Bullshit argument, but 'those are my instructions'. A barrister can refuse to run it."},
+{t:"Where they sit",q:"Where does a barrister work, and who manages the workload?",a:"Their own chambers, not a firm. They manage their own time, their own workload, and choose which briefs to accept."},
+{t:"Entry route",q:"What's the barrister pathway as Abdoullah described it?",a:"Sit and pass the bar exam any time after graduating, then the Bar Readers' Course: advocacy training plus a mentor. You can leapfrog solicitor practice entirely."},
+{t:"Money at the bar",q:"What did he say about barrister fees?",a:"He didn't know a single barrister charging under $3,000 an hour. Flag this as his figure, not a verified rate: NSW junior counsel rates vary widely."},
+{t:"Solicitor caution",q:"Why did he advise against the solicitor route for you specifically?",a:"You're bound by client instructions even when the argument is garbage, and your work depends heavily on other people in the firm. Both cut against what you said you want."},
+{t:"The pipeline",q:"What happens between graduating and practising as a solicitor?",a:"GDLP study component, then roughly six months of unpaid placement, then apply to the Supreme Court for a practising certificate, then about two years of supervised probation running everything past a supervisor."},
+{t:"The warning",q:"What was his warning about the supervised period?",a:"Some firms use it as free labour. And the legal community is a small pond: if you push back on being wage-thefted, it circulates and hurts your next job."},
+{t:"Tyson",q:"What was the Tyson example?",a:"A friend, criminal lawyer in Melbourne, junior partner at Dugan George: grossing around $75k while working 12-hour days, seven days a week."},
+{t:"Corporate pay",q:"How did he rate corporate law against criminal?",a:"Bigger firms, somewhat better conditions, and the pay is even worse. Not the escape hatch people assume it is."},
+{t:"Graduate salary gap",q:"Government vs private graduate salary, in his figures?",a:"Government around $75k. Private industry around $40-45k, sometimes $50k if you're lucky. Progression in the first five years is also better in government."},
+{t:"Why government first",q:"The real reason he recommends starting in government?",a:"Training. Government spends money skilling you up. His certificates in government investigations and his roughly $10k GDLP were both paid for."},
+{t:"Court exposure",q:"Why do you get into court faster in government?",a:"Public prosecution bodies (police prosecutions, OPP) have you in court by week one or two. Private firms guard clients because clients are their income."},
+{t:"The private-sector ceiling",q:"What makes the private sector hard to climb early on?",a:"Client contact is where the money is, so firms won't let a junior near a client until trust is built. You do menial background work first, plus billable-hour pressure."},
+{t:"In-house",q:"In-house counsel in one line?",a:"Better pay than running your own solicitor practice, far more stable hours, and extra opportunities inside the business."},
+{t:"The consistency trap",q:"What's the catch with 'consistent' areas like conveyancing, wills and estates?",a:"Steady work, rarely complex. And as a barrister in those areas you only get briefed once something has already gone badly wrong."},
+{t:"The deli ticket",q:"Why is your law degree a 'deli ticket'?",a:"It puts you in the queue. It proves you can turn up and finish work, nothing more. It doesn't prove you take instruction, take criticism, or can be trusted with real responsibility."},
+{t:"What actually wins",q:"What does he say actually lands the job?",a:"Referees and demonstrable experience. He's done more interviews than he has fingers and toes and has never once been asked for his marks."},
+{t:"The marks exception",q:"Who does ask for marks, and why?",a:"Law firms, and only from graduates. His read: they're screening for people pleasers who'll give the firm their entire life."},
+{t:"The brother",q:"What happened to his brother, and what's the lesson?",a:"Dux of engineering, name in gold leaf above the building, then sat jobless for 12 months because he waited until after graduation to look. Start in your second-last year."},
+{t:"Two kinds of job",q:"Graduate role vs substantive role?",a:"Graduate roles assume you know nothing and train you: preference these. Substantive roles are existing positions usually wanting experience, harder to land, with no training guarantee."},
+{t:"Timing",q:"When do graduate programs open and close?",a:"Eight to twelve months before the job starts. His intake closed 19 January 2010, assessments ran three months, offer landed in August, start the following January."},
+{t:"2026 cycle",q:"What was the current-cycle example?",a:"The Victorian Government graduate program advertised in March and closed in May, for an intake starting January 2027."},
+{t:"Two documents",q:"What are the two application documents and their separate jobs?",a:"Resume: clinical dot points, who you are and where you've been, no overselling. Cover letter: detailed and rewritten for every single employer."},
+{t:"FLIPPERS",q:"What is FLIPPERS and why does it matter?",a:"The Victoria Police values acronym: Flexibility, Leadership, Integrity, Professionalism, Responsibility, Safety. He wove every one into his cover letter to signal cultural fit."},
+{t:"Verbs",q:"Why do an employer's own verbs matter twice over?",a:"They signal you did the research, and ATS/AI screening scans for those exact verbs and value words. Miss them and you can get an automated rejection within the hour."},
+{t:"Volume",q:"How many applications did he submit as a graduate?",a:"About 50, each one customised. That effort is the dividing line between graduating with a job and waiting 12 months for one."},
+{t:"The interview panel",q:"Who's usually in the room, and what are they deciding?",a:"Your future manager, their manager, and someone from HR. By interview stage your qualifications are assumed: they're deciding whether you fit the organisation."},
+{t:"Judith Dredge",q:"What's the referee story, and why does he keep telling it?",a:"He volunteered under principal lawyer Judith Dredge at a community legal centre. His interviewer Jenny Pakula ran into Judith at a CPD seminar, Judith talked him up, he got the offer next day. Networks open doors."},
+{t:"Where to volunteer",q:"Where should you be looking for placements?",a:"Community legal centres, government bodies (corrections, police, justice, finance, treasury, tax, state and federal), law firms, accounting firms, and university-exclusive clinics. Ask SCU what they run."},
+{t:"Nutshells",q:"What are the Nutshell books for?",a:"Read the matching five-to-six page chapter before the lecture so the lecture lands. Around $40 each, and they carry the cases, references and legislation you need for assignments."}
+];
+const RATE=[["got","\u2713 Nailed it","var(--mint)","var(--ink)"],["near","~ Nearly","var(--brass)","var(--ink)"],["no","\u2715 Nope","var(--ribbon)","#FCFDFF"]];
+let order=CARDS.map(function(_,i){return i;}),pos=0,flipped=false,scores={},done=false;
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+function render(){
+ document.getElementById("rail").innerHTML=order.map(function(cid,i){var s=scores[cid];
+  var bg=s==="got"?"var(--mint)":s==="near"?"var(--brass)":s==="no"?"var(--ribbon)":"transparent";
+  return '<i class="'+(i===pos&&!done?"on":"")+'" style="background:'+bg+'"></i>';}).join("");
+ var stage=document.getElementById("stage"),nav=document.getElementById("nav");
+ if(done){
+  var vals=Object.keys(scores).map(function(k){return scores[k];});
+  var g=vals.filter(function(v){return v==="got";}).length,n=vals.filter(function(v){return v==="near";}).length,b=vals.filter(function(v){return v==="no";}).length;
+  var rd=Object.keys(scores).filter(function(k){return scores[k]!=="got";}).map(function(k){return CARDS[+k];});
+  stage.innerHTML='<div class="card" style="background:var(--mint);animation:popin .35s ease-out">'+
+   '<h2 class="hd" style="text-shadow:3px 3px 0 var(--paper)">Brief closed.</h2>'+
+   '<p style="font-size:21px;margin:0 0 18px">'+g+' nailed &middot; '+n+' nearly &middot; '+b+' nope</p>'+
+   (rd.length?'<h3 class="hd" style="font-size:26px">Re-drill bundle</h3><ul>'+rd.map(function(c){return '<li><strong>'+esc(c.t)+'</strong> &mdash; '+esc(c.q)+'</li>';}).join("")+'</ul>':
+    '<p style="font-family:Caveat,cursive;font-size:30px;margin:0">Clean sweep. Go do the timeline task instead.</p>')+'</div>';
+  nav.innerHTML='<button class="btn" style="background:var(--ribbon);color:#FCFDFF" onclick="redrill()">Run the misses again</button>'+
+   '<button class="btn" style="background:var(--sky)" onclick="shuffle()">Reshuffle all '+CARDS.length+'</button>';
+  return;
+ }
+ var c=CARDS[order[pos]];
+ stage.innerHTML='<button style="width:100%;min-height:320px;display:flex;flex-direction:column;padding:'+
+  (flipped?'34px 28px 28px':'104px 28px 28px')+';background:'+(flipped?'var(--paper)':'var(--lav)')+
+  ';box-shadow:10px 10px 0 var(--ink);border-width:4px;position:relative;overflow:hidden;animation:popin .3s ease-out"'+
+  ' aria-label="'+(flipped?'Hide answer':'Reveal answer')+'" onclick="flip()">'+
+  '<span style="position:absolute;top:0;right:0;width:0;height:0;border-left:46px solid transparent;border-top:46px solid '+(flipped?'var(--mint)':'var(--sky)')+'"></span>'+
+  (flipped?'':'<span style="position:absolute;left:0;right:0;top:74px;height:15px;background:var(--ribbon);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)"></span>'+
+   '<span style="position:absolute;left:50%;top:60px;width:44px;height:44px;margin-left:-22px;border-radius:50%;background:var(--ribbon);border:3.5px solid var(--ink)"></span>')+
+  '<span class="chip" style="align-self:flex-start">'+String(pos+1).padStart(2,"0")+' / '+String(order.length).padStart(2,"0")+' &middot; '+esc(c.t)+'</span>'+
+  '<p class="q">'+esc(c.q)+'</p>'+
+  (flipped?'<div style="border-top:3px dashed var(--ink);padding-top:14px;margin-top:auto"><p style="font-size:21px;line-height:1.5">'+esc(c.a)+'</p></div>'
+          :'<p style="font-family:Caveat,cursive;font-size:27px;margin:auto 0 0">say it out loud, then tap to untie the brief &nearr;</p>')+
+  '</button>';
+ nav.innerHTML = flipped
+  ? RATE.map(function(r){return '<button class="btn" style="background:'+r[2]+';color:'+r[3]+'" onclick="rate(\''+r[0]+'\')">'+r[1]+'</button>';}).join("")
+  : '<button class="btn" style="background:var(--sky)" onclick="step(-1)">&larr; back</button>'+
+    '<button class="btn" style="background:var(--sky)" onclick="shuffle()">shuffle</button>'+
+    '<button class="btn" style="background:var(--sky)" onclick="step(1)">skip &rarr;</button>';
+}
+function flip(){flipped=!flipped;render();}
+function step(d){pos=Math.max(0,Math.min(order.length-1,pos+d));flipped=false;render();}
+function rate(k){scores[order[pos]]=k;if(pos+1>=order.length){done=true;}else{pos++;}flipped=false;render();}
+function shuffle(){order=CARDS.map(function(_,i){return i;});for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;}pos=0;flipped=false;scores={};done=false;render();}
+function redrill(){var ids=Object.keys(scores).filter(function(k){return scores[k]!=="got";}).map(Number);if(!ids.length)return;order=ids;pos=0;scores={};done=false;flipped=false;render();}
+render();
+</script>
+</body>
+</html>
