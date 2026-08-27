@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Session 6 Career Maps &middot; SCU LAW Study Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="session6.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">&larr; Study Hub</a>
+<div class="plate">
+<p class="kicker">Tutor Session 06 &middot; Abdoullah &middot; 27 Aug 2026</p>
+<h1>Career Maps</h1>
+<p class="sub">four maps &middot; everything taps open</p>
+</div>
+<nav id="tabs" style="display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin:24px 0"></nav>
+<main id="stage"></main>
+</div>
+<footer>Built from the 27 Aug 2026 tutor session with Abdoullah &mdash; the final session of the series.<br>
+Salary and fee figures are his, spoken from memory. Victorian examples are illustrative; your jurisdiction is NSW. Verify before you rely on any of it.</footer>
+<script>
+var PATHS=[
+{id:"bar",name:"The Bar",col:"#FF4E6A",tag:"His pick for you",entry:"Sit the bar exam any time after graduating, then the Bar Readers' Course: advocacy training plus a mentor. You can skip solicitor practice entirely.",upside:["Total autonomy &mdash; own chambers, own hours, own choice of briefs","Not bound by client instructions; duty runs to the court","The interesting end of the work: deep analysis plus oral advocacy","Fees he quoted: nothing under $3,000/hr (his figure, unverified)"],katch:["Work isn't guaranteed &mdash; you eat what you catch","A year or two on modest money during Bar Readers'","In steady areas (wills, conveyancing) you only get briefed once it's already gone wrong"],fit:"Matches your comfort with detail, your tolerance for deadlines, and your preference for not depending on a team."},
+{id:"sol",name:"Solicitor",col:"#D6C9F7",tag:"He advised against, for you",entry:"GDLP study component, then roughly 6 months unpaid placement, then apply to the Supreme Court for a practising certificate, then about 2 years supervised probation.",upside:["Broadest entry point; most jobs sit here","Real client relationships and file ownership over time","A path into partnership or into your own firm"],katch:["Bound by client instructions even when the argument is garbage","Heavy dependence on other people in the firm","Tyson: junior partner, ~$75k, 12-hour days, seven days a week","Corporate pays even worse than criminal","Some firms treat the supervised period as free labour, and the profession is a small pond"],fit:"Cuts against two things you said you wanted: autonomy, and not carrying other people's output."},
+{id:"gov",name:"Government",col:"#A8E6CF",tag:"Best first five years",entry:"Graduate program. Applications open and close 8-12 months before the intake starts.",upside:["~$75k graduate salary vs ~$40-45k private (his figures)","They pay to train you &mdash; his investigations certificates and ~$10k GDLP were covered","Court by week one or two in prosecution roles","Structured progression across the first five years"],katch:["Highly competitive intakes","Less choice over what you work on early","Bureaucracy, and slower ceilings later on"],fit:"Strong on your 'consistent work' and 'super matters' answers. Also the fastest way to bankable court experience."},
+{id:"inh",name:"In-house",col:"#9FD8F5",tag:"Stability play",entry:"Usually a substantive or graduate role inside a company's legal team.",upside:["Better pay than running your own solicitor practice","Genuinely stable hours","Side opportunities across the business, not just legal work"],katch:["One client, forever","Less court exposure","Career depends partly on the company's health"],fit:"Worth holding as a fallback, not a first move &mdash; the early training isn't as strong as government."}];
+var CLOCK=[
+{t:"Year 1-2",label:"Build the referees",body:"Paid or unpaid, one hour a week counts. Community legal centres, government bodies, firms, accounting firms, SCU's own clinics. Call and ask: do you take volunteers, and what do you look for in graduates?",col:"#A8E6CF"},
+{t:"Ongoing",label:"Log your reactions to units",body:"Some units will grab you, some will shit you to tears. Those reactions are your specialisation data. He hated real property and equity; other people love them.",col:"#D6C9F7"},
+{t:"Second-last year",label:"Ramp up, hard",body:"By now you should know roughly where you want to land. Start following specific employers and tracking their cycles. This is the year his brother skipped, and it cost him 12 months of unemployment despite being dux.",col:"#F5B72E"},
+{t:"T-12 to T-8 months",label:"Applications open and close",body:"Graduate programs advertise 8-12 months before the intake. 2026 example: Victorian Government advertised March, closed May, for a January 2027 start. Cycles move with no obvious logic &mdash; follow the employer, not the calendar.",col:"#FF4E6A"},
+{t:"T-8 to T-5 months",label:"Assessments",body:"His ran about three months: interviews, assessment centres, testing.",col:"#9FD8F5"},
+{t:"T-5 months",label:"Offer lands",body:"He got his in August to start the following January, before he'd even sat his November exams. Best possible position: job in hand before you graduate.",col:"#FFC9A8"}];
+var FUNNEL=[
+{w:100,label:"Everyone with the degree",note:"His cohort: ~100 graduates from one uni, ~700 across the state that year. The degree is a deli ticket &mdash; it puts you in the queue, nothing more.",col:"#D6C9F7"},
+{w:78,label:"ATS / AI keyword screen",note:"Software scans for the employer's own verbs and values. Miss them and an automated rejection can land within the hour, sometimes at 1am.",col:"#FF4E6A"},
+{w:55,label:"Human reads the cover letter",note:"One version per employer. Their values acronym, their verbs, their language. Victoria Police: FLIPPERS &mdash; flexibility, leadership, integrity, professionalism, responsibility, safety. He submitted ~50 applications, every one rewritten.",col:"#F5B72E"},
+{w:36,label:"Interview: are you a fit?",note:"Panel of three &mdash; your manager, their manager, HR. Your qualifications are already assumed. Everything from here is cultural and behavioural fit.",col:"#9FD8F5"},
+{w:20,label:"Referee check decides it",note:"Judith Dredge, the principal lawyer he volunteered under. His interviewer Jenny Pakula met her at a CPD seminar, Judith talked him up, offer came the next day. He has her name in his will.",col:"#A8E6CF"}];
+var PROFILE=[
+{q:"Stay in radio, or something different?",a:"Something different",bar:0,sol:0,gov:0,inh:0,note:"Rules out a legal role in your current industry."},
+{q:"Client contact or research?",a:"Both, happily",bar:3,sol:3,gov:3,inh:2,note:"Keeps every door open. Plenty of people can only do one."},
+{q:"Nitty-gritty detail?",a:"Fine with it &mdash; you live in numbers",bar:3,sol:2,gov:3,inh:2,note:"The single answer that made him say 'barrister'."},
+{q:"Adversarial persuasion?",a:"Not the end of the world",bar:2,sol:2,gov:3,inh:1,note:"Openness is enough at this stage. Mooting will tell you more."},
+{q:"Short deadlines and overtime?",a:"Kind of normal",bar:3,sol:3,gov:2,inh:1,note:"Removes the usual reason people rule out the bar."},
+{q:"Depend on a team's output?",a:"Ideally not",bar:3,sol:0,gov:2,inh:2,note:"This is the clearest strike against the solicitor route."},
+{q:"Job security?",a:"Consistent is better; as long as it's there",bar:1,sol:2,gov:3,inh:3,note:"Points at government or in-house for the early years."},
+{q:"Flexibility and benefits?",a:"Super matters; flexibility doesn't",bar:2,sol:2,gov:3,inh:3,note:"Employer super is a real advantage of salaried roles."},
+{q:"Emotional or vulnerable clients?",a:"That's all right",bar:2,sol:3,gov:3,inh:0,note:"Opens community legal centres, crime and family &mdash; your stated interests."},
+{q:"Domestic or overseas?",a:"Domestic",bar:2,sol:2,gov:3,inh:2,note:"Tamworth first: local government, community legal centres, regional firms."}];
+var TABS=[["fork","The Fork","four pathways"],["clock","The Clock","application timing"],["funnel","The Funnel","what survives"],["profile","Your Profile","answers &rarr; fit"]];
+var KEYS=[["bar","Bar","#FF4E6A"],["gov","Gov","#A8E6CF"],["inh","In-house","#9FD8F5"],["sol","Solicitor","#D6C9F7"]];
+var tab="fork", open={fork:"bar",clock:3,funnel:1,profile:2};
+function tabsHTML(){return TABS.map(function(t){var on=tab===t[0];
+ return '<button style="padding:11px 12px 13px;text-align:center;background:'+(on?"var(--ink)":"var(--paper)")+
+  ';color:'+(on?"var(--paper)":"var(--ink)")+';box-shadow:'+(on?"6px 6px 0 var(--brass)":"4px 4px 0 #20213F55")+
+  ';transform:'+(on?"translateY(-2px)":"none")+'" onclick="go(\''+t[0]+'\')">'+
+  '<div style="font-family:Bangers,cursive;font-size:22px;letter-spacing:1px">'+t[1]+'</div>'+
+  '<div style="font-family:Caveat,cursive;font-size:19px">'+t[2]+'</div></button>';}).join("");}
+function fork(){var o=open.fork;var p=null;PATHS.forEach(function(x){if(x.id===o)p=x;});
+ return '<h2 class="hd">You graduate. Four doors.</h2><p class="lead">Tap a door. Abdoullah pushed you hard toward the bar and openly advised against the solicitor route &mdash; but government is his pick for the first five years, and those two aren&rsquo;t in conflict.</p>'+
+ '<div style="display:flex;gap:0;margin-bottom:18px"><div style="background:var(--ink);color:var(--paper);border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:16px 12px;min-width:96px;display:flex;align-items:center;justify-content:center;text-align:center;flex-shrink:0"><span style="font-family:Bangers,cursive;font-size:20px;line-height:1.1">LLB<br>in hand</span></div>'+
+ '<div style="flex:1;display:grid;gap:8px;padding-left:22px;position:relative">'+
+ '<div style="position:absolute;left:10px;top:6%;bottom:6%;width:4px;background:var(--ink)"></div>'+
+ '<div style="position:absolute;left:0;top:50%;width:12px;height:4px;margin-top:-2px;background:var(--ink)"></div>'+
+ PATHS.map(function(_,k){return '<div style="position:absolute;left:10px;width:12px;height:4px;background:var(--ink);top:calc('+((k+0.5)*(100/PATHS.length))+'% - 2px)"></div>';}).join("")+
+ PATHS.map(function(x){return '<button style="background:'+x.col+';border:4px solid var(--ink);padding:12px 16px 14px;box-shadow:'+
+  (o===x.id?"8px 8px 0 var(--ink)":"4px 4px 0 var(--ink)")+';transform:'+(o===x.id?"translateX(6px)":"none")+
+  '" onclick="pick(\'fork\',\''+x.id+'\')"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">'+
+  '<span style="font-family:Bangers,cursive;font-size:26px;letter-spacing:1px">'+x.name+'</span>'+
+  '<span style="font-family:Caveat,cursive;font-size:21px">'+x.tag+'</span></div></button>';}).join("")+
+ '</div></div>'+
+ (p?'<div class="card" style="animation:popin .28s ease-out;border-left:12px solid '+p.col+'">'+
+  '<span class="chip">How you get in</span><p style="font-size:19px;line-height:1.45;margin:10px 0 18px">'+p.entry+'</p>'+
+  '<div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">'+
+  '<div><span class="chip" style="background:#1B7A4B">Upside</span><ul>'+p.upside.map(function(t){return '<li>'+t+'</li>';}).join("")+'</ul></div>'+
+  '<div><span class="chip" style="background:#C42038">The catch</span><ul>'+p.katch.map(function(t){return '<li>'+t+'</li>';}).join("")+'</ul></div></div>'+
+  '<div style="margin-top:16px;padding:12px 16px;background:'+p.col+';border:3px dashed var(--ink)">'+
+  '<strong style="font-family:Bangers,cursive;font-size:19px;letter-spacing:1px">Fit with your answers: </strong><span style="font-size:19px">'+p.fit+'</span></div></div>':'');}
+function clock(){var o=open.clock;
+ return '<h2 class="hd">Work backwards from the start date.</h2><p class="lead">His brother was dux of engineering and sat jobless for 12 months because he waited until after graduation. The whole point of this map is that the job is decided long before you finish.</p>'+
+ '<div style="position:relative;padding-left:30px"><div style="position:absolute;left:9px;top:6px;bottom:6px;width:6px;background:var(--ink)"></div>'+
+ CLOCK.map(function(s,k){return '<div style="position:relative;margin-bottom:10px">'+
+  '<span style="position:absolute;left:-30px;top:14px;width:24px;height:24px;border-radius:50%;background:'+s.col+';border:4px solid var(--ink);box-sizing:border-box"></span>'+
+  '<button style="width:100%;background:'+(o===k?s.col:"var(--paper)")+';border:4px solid var(--ink);padding:12px 16px 14px;box-shadow:'+
+  (o===k?"8px 8px 0 var(--ink)":"4px 4px 0 var(--ink)")+'" onclick="pick(\'clock\','+k+')">'+
+  '<div style="font-family:Caveat,cursive;font-size:21px;letter-spacing:1.5px;text-transform:uppercase">'+s.t+'</div>'+
+  '<div style="font-family:Bangers,cursive;font-size:24px;letter-spacing:.8px">'+s.label+'</div>'+
+  (o===k?'<p style="font-size:19px;line-height:1.45;margin-top:10px">'+s.body+'</p>':'')+'</button></div>';}).join("")+'</div>'+
+ '<div class="card" style="background:var(--blush);padding:14px 18px 16px;margin-top:14px"><strong style="font-family:Bangers,cursive;font-size:20px;letter-spacing:1px">Your version: </strong>'+
+ '<span style="font-size:19px">You start T5 2026 part-time online, so graduation is years out &mdash; but the referee-building step starts now, not later. One hour a week at a Tamworth community legal centre in 2027 is worth more at application time than any mark you&rsquo;ll get.</span></div>';}
+function funnel(){var o=open.funnel;
+ return '<h2 class="hd">What actually survives each stage.</h2><p class="lead">He has done more interviews than he has fingers and toes and has never once been asked for his marks. Tap each stage to see what does the filtering.</p>'+
+ '<div style="display:grid;gap:9px;margin-bottom:18px">'+
+ FUNNEL.map(function(f,k){return '<div style="display:flex;justify-content:center"><button style="width:'+f.w+'%;background:'+f.col+
+  ';border:4px solid var(--ink);padding:13px 16px 15px;text-align:center;color:'+(k===1?"#FCFDFF":"var(--ink)")+
+  ';box-shadow:'+(o===k?"8px 8px 0 var(--ink)":"4px 4px 0 var(--ink)")+'" onclick="pick(\'funnel\','+k+')">'+
+  '<span style="font-family:Bangers,cursive;font-size:clamp(17px,2.4vw,23px);letter-spacing:.8px">'+f.label+'</span></button></div>';}).join("")+'</div>'+
+ (o!==null?'<div class="card" style="animation:popin .28s ease-out;border-left:12px solid '+FUNNEL[o].col+'">'+
+  '<span class="chip">'+FUNNEL[o].label+'</span><p style="font-size:19px;line-height:1.5;margin-top:10px">'+FUNNEL[o].note+'</p></div>':'');}
+function profile(){var o=open.profile;
+ var totals=KEYS.map(function(x){var v=0;PROFILE.forEach(function(r){v+=r[x[0]];});return {n:x[1],col:x[2],v:v};});
+ totals.sort(function(a,b){return b.v-a.v;});
+ var max=Math.max.apply(null,totals.map(function(t){return t.v;}));
+ return '<h2 class="hd">Your ten answers, scored.</h2><p class="lead">My scoring of what you actually said in the session, 0-3 per pathway. Not a verdict &mdash; a starting hypothesis you test by doing units and getting experience.</p>'+
+ '<div class="card" style="margin-bottom:20px"><span class="chip">Running totals</span><div style="display:grid;gap:10px;margin-top:14px">'+
+ totals.map(function(t){return '<div style="display:flex;align-items:center;gap:12px"><span style="font-family:Bangers,cursive;font-size:21px;min-width:96px">'+t.n+'</span>'+
+  '<div style="flex:1;height:26px;border:3px solid var(--ink);position:relative"><div style="position:absolute;inset:0;right:auto;width:'+(t.v/max*100)+'%;background:'+t.col+'"></div></div>'+
+  '<span style="font-family:Bangers,cursive;font-size:21px;min-width:34px;text-align:right">'+t.v+'</span></div>';}).join("")+'</div></div>'+
+ '<div style="display:grid;gap:8px">'+
+ PROFILE.map(function(r,k){return '<button style="width:100%;background:'+(o===k?"var(--peach)":"var(--paper)")+';border:4px solid var(--ink);padding:12px 16px 14px;box-shadow:'+
+  (o===k?"8px 8px 0 var(--ink)":"4px 4px 0 var(--ink)")+'" onclick="pick(\'profile\','+k+')">'+
+  '<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">'+
+  '<span style="font-family:Bangers,cursive;font-size:21px">'+r.q+'</span>'+
+  '<span style="font-family:Caveat,cursive;font-size:22px">&ldquo;'+r.a+'&rdquo;</span></div>'+
+  (o===k?'<div style="margin-top:12px"><p style="font-size:19px;line-height:1.45;margin-bottom:12px">'+r.note+'</p>'+
+   '<div style="display:flex;gap:8px;flex-wrap:wrap">'+KEYS.map(function(x){return '<span style="padding:4px 12px 6px;background:'+x[2]+
+   ';border:2.5px solid var(--ink);font-family:Bangers,cursive;font-size:17px">'+x[1]+' +'+r[x[0]]+'</span>';}).join("")+'</div></div>':'')+
+  '</button>';}).join("")+'</div>';}
+function go(t){tab=t;render();}
+function pick(m,v){open[m]=open[m]===v?null:v;render();}
+function render(){document.getElementById("tabs").innerHTML=tabsHTML();
+ var s=document.getElementById("stage");
+ s.innerHTML={fork:fork,clock:clock,funnel:funnel,profile:profile}[tab]();
+ s.style.animation="popin .3s ease-out";}
+render();
+</script>
+</body>
+</html>
