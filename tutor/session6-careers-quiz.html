@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Session 6 Quiz &middot; SCU LAW Study Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="session6.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">&larr; Study Hub</a>
+<div class="plate">
+<p class="kicker">Tutor Session 06 &middot; 27 Aug 2026 &middot; closed book</p>
+<h1>Careers Quiz</h1>
+<p class="sub">18 questions &middot; no notes &middot; instant reasons</p>
+</div>
+<div class="rail" id="rail"></div>
+<div id="stage"></div>
+<div id="nav" class="row"></div>
+</div>
+<footer>Built from the 27 Aug 2026 tutor session with Abdoullah &mdash; the final session of the series.<br>
+Salary and fee figures are his, spoken from memory. Victorian examples are illustrative; your jurisdiction is NSW. Verify before you rely on any of it.</footer>
+<script>
+const QS = [
+{q:"What is the single biggest structural difference between a barrister and a solicitor?",o:["Barristers need ten years' experience before appearing","Barristers are not bound by their client's instructions","Barristers cannot appear in criminal matters","Barristers work in firms; solicitors work alone"],c:1,e:"A barrister's duty runs to the court, so they make the final call on what argument to run. Abdoullah's stolen-TV example: the solicitor had to argue a garbage defence because 'those are my instructions'."},
+{q:"What did Abdoullah give as the entry route to the bar?",o:["Complete the GDLP, then two years of supervised practice","Be admitted as a solicitor for five years first","Sit and pass the bar exam, then the Bar Readers' Course","Apply to the Supreme Court for a practising certificate"],c:2,e:"You can leapfrog solicitor practice entirely. Bar exam any time after graduating, then Bar Readers': advocacy training plus a mentor."},
+{q:"Put the solicitor pipeline in the right order after graduation.",o:["Practising certificate, GDLP, placement, probation","GDLP study, ~6 months placement, practising certificate, ~2 years supervised","Placement, bar exam, GDLP, practising certificate","Supervised practice, GDLP, placement, certificate"],c:1,e:"Four stages, roughly two and a half years past graduation before you're operating unsupervised."},
+{q:"Graduate salary in government vs private industry, in his figures?",o:["About the same in both","~$75k government vs ~$40-45k private","~$50k government vs ~$75k private","~$100k government vs ~$60k private"],c:1,e:"He also said progression is better in government across the first five years. Treat these as his numbers, not verified NSW rates."},
+{q:"What did he name as the real advantage of starting in government?",o:["Better pay","Shorter hours","The training investment","Prestige on your resume"],c:2,e:"Pay is nice, training is the point. His government investigations certificates and roughly $10k GDLP were both paid for."},
+{q:"Why do you get into court faster in a government role?",o:["Government matters are simpler","Private firms guard client contact because clients are their income","Government has fewer lawyers","Courts prefer public solicitors"],c:1,e:"Public prosecution bodies put you in court in week one or two. In private practice you do menial background work until trust is built."},
+{q:"In his metaphor, what is your law degree?",o:["A golden ticket","A deli ticket","A licence to practise","A door key"],c:1,e:"It puts you in the queue. It proves you can turn up and finish work, nothing about whether you take instruction or criticism."},
+{q:"What has he never once been asked for across all his interviews?",o:["His referees","His marks","A writing sample","His GDLP results"],c:1,e:"More interviews than he has fingers and toes, never once asked. Referees and demonstrable experience are what move the needle."},
+{q:"Who does ask graduates for marks, and what was his read on why?",o:["Government, to rank applicants fairly","Law firms, screening for people pleasers who'll give the firm their whole life","In-house teams, to check technical ability","Nobody asks any more"],c:1,e:"His words were deliberately blunt. Not a reason to tank your marks, just a reason not to treat them as the strategy."},
+{q:"What happened to his brother, and what's the lesson?",o:["He failed his degree, so start early","He was dux but sat jobless 12 months because he waited until after graduation","He took a graduate role and hated it","He moved overseas for work"],c:1,e:"Name in gold leaf above the engineering building and no job for a year. Start applying in your second-last year."},
+{q:"When do graduate programs typically open and close?",o:["1-2 months before the job starts","3-4 months before","8-12 months before the job starts","After you graduate"],c:2,e:"His own intake closed 19 January 2010, assessments ran three months, offer landed in August, start the following January."},
+{q:"The 2026-cycle example he gave: the Victorian Government graduate program...",o:["advertised in March, closed in May, for a January 2027 intake","advertised in June, closed in July, for a mid-2027 intake","ran rolling applications all year","closed before Christmas for a February start"],c:0,e:"Cycles move around with no obvious logic, which is exactly why you follow specific employers instead of guessing."},
+{q:"What separates a graduate role from a substantive role?",o:["Graduate roles pay more","Graduate roles assume you know nothing and train you","Substantive roles are only in government","Graduate roles are always part-time"],c:1,e:"Preference graduate roles. Substantive roles usually want experience, are harder to land, and carry no training guarantee."},
+{q:"What are the separate jobs of the resume and the cover letter?",o:["Both should be tailored equally to each employer","Resume sells you; cover letter lists your history","Resume is clinical dot points; cover letter is detailed and rewritten per employer","Cover letter is optional if the resume is strong"],c:2,e:"The resume is deliberately unglamorous: who you are, where you've been. The cover letter does all the persuading, one version per employer."},
+{q:"What does FLIPPERS stand for?",o:["Flexibility, Loyalty, Integrity, Persistence, Precision, Ethics, Respect, Service","Flexibility, Leadership, Integrity, Professionalism, Responsibility, Safety","Fairness, Learning, Independence, Practice, Purpose, Rigour, Standards","It's a mnemonic for the four-quarter exam method"],c:1,e:"The Victoria Police values acronym. He wove every single one into his cover letter to signal cultural fit."},
+{q:"Why do an employer's own verbs matter twice over?",o:["They make the letter shorter","They signal research AND get you past ATS/AI keyword screening","They're required by law","They help you remember the interview questions"],c:1,e:"Miss the verbs and values and you can get an automated rejection within the hour, sometimes at 1am."},
+{q:"Who typically sits on the interview panel, and what are they deciding?",o:["Two lawyers deciding if you know enough law","Your manager, their manager and HR, deciding whether you fit the organisation","A single hiring manager checking your marks","An external recruiter ranking candidates"],c:1,e:"By interview stage they've already accepted you're qualified on paper. Everything after that is fit."},
+{q:"What does the Judith Dredge story demonstrate?",o:["Volunteering counts as GDLP placement hours","Community legal centres pay better than firms","Referees and networks are what actually open the door","You should always name three referees"],c:2,e:"His interviewer bumped into his referee at a CPD seminar, she talked him up, he got the call the next day. He has her name in his will."}
+];
+const L=["A","B","C","D"];
+let i=0,picked=null,answers=[],done=false;
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+function render(){
+ document.getElementById("rail").innerHTML=QS.map(function(_,k){var a=answers.filter(function(x){return x.i===k;})[0];
+  return '<i class="'+(k===i&&!done?"on":"")+'" style="background:'+(a?(a.right?"var(--mint)":"var(--ribbon)"):"transparent")+'"></i>';}).join("");
+ var stage=document.getElementById("stage"),nav=document.getElementById("nav");
+ if(done){
+  var score=answers.filter(function(a){return a.right;}).length,pct=Math.round(score/QS.length*100);
+  var v=pct>=85?"Judgment reserved for you. Excellent.":pct>=65?"Solid. Patch the misses below and move on.":"Under 65. Re-read the study pack before you retry this.";
+  var miss=answers.filter(function(a){return !a.right;});
+  stage.innerHTML='<div class="card" style="background:'+(pct>=65?"var(--mint)":"var(--blush)")+';animation:popin .35s ease-out">'+
+   '<h2 class="hd" style="font-size:clamp(34px,7vw,52px);text-shadow:3px 3px 0 var(--paper)">'+score+' / '+QS.length+' &middot; '+pct+'%</h2>'+
+   '<p style="font-family:Caveat,cursive;font-size:27px;margin:0 0 18px">'+v+'</p>'+
+   (miss.length?'<h3 class="hd" style="font-size:26px">Overruled &mdash; go back over these</h3><ul>'+
+     miss.map(function(a){return '<li style="margin-bottom:10px"><strong>'+esc(QS[a.i].q)+'</strong><br><span style="opacity:.85">Correct: '+esc(QS[a.i].o[QS[a.i].c])+'</span></li>';}).join("")+'</ul>'
+    :'<p style="font-size:21px">Clean sweep. Nothing to re-drill.</p>')+'</div>';
+  nav.innerHTML='<button class="btn" style="background:var(--brass)" onclick="reset()">Run it again</button>';
+  return;
+ }
+ var q=QS[i];
+ stage.innerHTML='<div style="position:relative">'+
+  (picked!==null?'<div style="position:absolute;top:-18px;right:14px;z-index:8;font-family:Bangers,cursive;font-size:30px;letter-spacing:2px;padding:6px 16px 8px;color:'+
+    (picked===q.c?"#1B7A4B":"#C42038")+';border:5px solid '+(picked===q.c?"#1B7A4B":"#C42038")+
+    ';border-radius:6px;background:rgba(255,246,233,.82);animation:slam .42s cubic-bezier(.3,1.7,.5,1) both">'+(picked===q.c?"Sustained":"Overruled")+'</div>':'')+
+  '<div class="card" style="animation:popin .3s ease-out"><span class="chip">Question '+String(i+1).padStart(2,"0")+' of '+QS.length+'</span>'+
+  '<p class="q">'+esc(q.q)+'</p><div style="display:grid;gap:10px">'+
+  q.o.map(function(opt,k){var shown=picked!==null,isC=k===q.c,isP=k===picked;
+   var bg=!shown?"var(--paper)":isC?"var(--mint)":isP?"var(--ribbon)":"var(--paper)";
+   var fg=shown&&isP&&!isC?"#FCFDFF":"var(--ink)";
+   return '<button style="display:flex;gap:12px;align-items:flex-start;width:100%;padding:13px 16px 15px;background:'+bg+
+    ';color:'+fg+';box-shadow:'+(shown&&(isC||isP)?"5px 5px 0 var(--ink)":"3px 3px 0 #20213F55")+
+    ';font-size:19px;line-height:1.35;opacity:'+(shown&&!isC&&!isP?".5":"1")+'" '+(shown?"disabled":"")+' onclick="choose('+k+')">'+
+    '<span style="font-family:Bangers,cursive;font-size:21px;min-width:26px;text-align:center;flex-shrink:0">'+L[k]+'</span><span>'+esc(opt)+'</span></button>';}).join("")+
+  '</div>'+
+  (picked!==null?'<div style="margin-top:20px;padding:16px 18px;background:var(--lav);border:3px dashed var(--ink);animation:popin .28s ease-out">'+
+    '<div style="font-family:Bangers,cursive;font-size:21px;letter-spacing:1.2px;margin-bottom:4px">Reasons</div>'+
+    '<p style="font-size:19px;line-height:1.45">'+esc(q.e)+'</p></div>':'')+
+  '</div></div>';
+ nav.innerHTML = picked!==null
+  ? '<button class="btn" style="background:var(--sky);font-size:25px" onclick="next()">'+(i+1>=QS.length?"Return the verdict &rarr;":"Next question &rarr;")+'</button>'
+  : '';
+}
+function choose(k){if(picked!==null)return;picked=k;answers.push({i:i,k:k,right:k===QS[i].c});render();}
+function next(){if(i+1>=QS.length){done=true;}else{i++;picked=null;}render();}
+function reset(){i=0;picked=null;answers=[];done=false;render();}
+render();
+</script>
+</body>
+</html>
